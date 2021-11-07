@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    name: freshmanager  #????
+    url: jdbc:mysql://localhost:3306/aishuati?useUnicode=true&useSSL=false&serverTimezone = GMT #url
+    username: root  #???
+    password: root  #??
+    driver-class-name: com.mysql.cj.jdbc.Driver  #???????

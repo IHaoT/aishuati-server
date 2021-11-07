@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class news {
+public class News {
     private int sander_Id;
     private int receiver_Id;
     private String content;
