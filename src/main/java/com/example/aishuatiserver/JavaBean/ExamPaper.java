@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class examPaper {
+public class ExamPaper {
     private int examPaper_Id;
     private String examPaper_name;
     private int subject_Id;

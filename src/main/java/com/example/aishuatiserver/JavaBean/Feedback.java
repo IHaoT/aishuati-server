@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class feedback {
+public class Feedback {
     private int receiver_id;
     private int sander_Id;
     private String content;

@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class administrator {
+public class Administrator {
     private int Administrator_id;
     private String Administrator_name;
     private String Administrator_pwd;

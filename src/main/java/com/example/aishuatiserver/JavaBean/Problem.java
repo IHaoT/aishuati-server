@@ -4,7 +4,7 @@ package com.example.aishuatiserver.JavaBean;
 import lombok.Data;
 
 @Data
-public class problem {
+public class Problem {
     private int problemId;
     private int subjectId;
     private int administratorId;
