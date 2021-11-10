@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class StuInfo {
     private int stuId;
+    private String stuName;
     private String stuNickName;
     private String stuEmail;
     private String stuTelephoto;
