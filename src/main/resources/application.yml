@@ -1,6 +1,6 @@
 spring:
   datasource:
-    name: freshmanager  #????
+    name: aishuati  #????
     url: jdbc:mysql://114.55.177.229:3306/aishuati?useUnicode=true&useSSL=false&serverTimezone = GMT #url
     username: root  #???
     password: root  #??

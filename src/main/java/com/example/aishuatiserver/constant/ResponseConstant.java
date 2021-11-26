@@ -12,6 +12,7 @@ public class ResponseConstant {
     public static final Map<String, Object> X_USER_LOGIN_FIRST = BaseResponsePackageUtil.errorMessage("请先登录");
     public static final Map<String, Object> X_USER_WRONG_PASSWORD = BaseResponsePackageUtil.errorMessage("用户名或密码错误");
     public static final Map<String, Object> X_USER_ALREADY_EXISTS = BaseResponsePackageUtil.errorMessage("用户已存在");
+    public static final Map<String, Object> X_ALREADY_EXISTS = BaseResponsePackageUtil.errorMessage("请勿重复添加");
 
     public static final Map<String, Object> V_USER_LOGIN_SUCCESS = BaseResponsePackageUtil.succeedMessage("登录成功");
     public static final Map<String, Object> V_USER_LOGOUT_SUCCESS = BaseResponsePackageUtil.succeedMessage("退出成功");
@@ -42,6 +43,7 @@ public class ResponseConstant {
     public static final Map<String, Object> X_UPDATE_FAILED = BaseResponsePackageUtil.errorMessage("更新失败");
     public static final Map<String, Object> X_DELETE_FAILED = BaseResponsePackageUtil.errorMessage("删除失败");
     public static final Map<String, Object> X_ADD_FAILED = BaseResponsePackageUtil.errorMessage("新增失败");
+    public static final Map<String, Object> X_REPLACE_PWD = BaseResponsePackageUtil.errorMessage("输入两次密码不一致");
 
     // Any success
     public static final Map<String, Object> V_UPDATE_SUCCESS = BaseResponsePackageUtil.succeedMessage("更新成功");
