@@ -26,7 +26,7 @@ public class MajorController {
     @Autowired
     private AdminService adminService;
 
-    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Map<String,Object> addMajor(
             @RequestParam(value = "majorName") String majorName,
             @RequestParam(value = "department") String department,
@@ -35,7 +35,7 @@ public class MajorController {
         if(!adminService.checkPermission(request.getSession(), PermissionLevel.SUPER_ADMIN)){
             return ResponseConstant.X_ACCESS_DENIED;
         }
-        if(majorService.majorIsAdd(majorName)) return ResponseConstant.X_ALREADY_EXISTS;
+//        if(majorService.majorIsAdd(majorName)) return ResponseConstant.X_ALREADY_EXISTS;
         majorService.addMajor(majorName,department);
         return ResponseConstant.V_ADD_SUCCESS;
     }

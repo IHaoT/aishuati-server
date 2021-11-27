@@ -23,8 +23,8 @@ public interface UserMapper {
     @Select("select count(*) from student where stu_account = #{stuAccount}")
     int countStuByAccount(String stuAccount);
 
-    @Select("select max(stu_Id) from student")
-    Integer getMaxStuId();
+    @Select("select IFNULL(max(stu_Id),0) from student")
+    int getMaxStuId();
 
     @Select("select stu_Id as stuId,stu_account as stuAccount,stu_Name as stuName,stu_password as stuPwd,stu_Nickname as stuNickName,stu_email as stuEmail,stu_telphoto as stuTelephoto,stu_majorId as majorId,stu_level from student where stu_account = #{stuAccount}")
     Student getStuByAccount(String stuAccount);

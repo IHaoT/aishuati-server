@@ -12,6 +12,6 @@ public interface EventLogMapper {
     @Insert("insert into user_event_log values(#{logId},#{stuId},#{stuName},#{content},#{createTime})")
     void addLog(User_event_log log);
 
-    @Select("select max(stu_event_log_Id) from user_event_log")
-    Integer getMaxLogId();
+    @Select("select IFNULL(max(stu_event_log_Id),0) from user_event_log")
+    int getMaxLogId();
 }

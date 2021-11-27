@@ -15,9 +15,7 @@ public class EventLogService {
     private EventLogMapper eventLogMapper;
 
     public Integer getMaxLogId(){
-        Integer maxId = eventLogMapper.getMaxLogId();
-        if(maxId == null) return 1;
-        else return maxId+1;
+        return eventLogMapper.getMaxLogId()+1;
     }
 
     public void addLog(Student student,String content){

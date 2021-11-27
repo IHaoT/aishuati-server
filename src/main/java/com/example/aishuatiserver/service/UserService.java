@@ -30,16 +30,12 @@ public class UserService {
         return userMapper.countStuByAccount(stuAccount) > 0;
     }
 
-    public int getStuId(){
-        Integer stuId = userMapper.getMaxStuId();
-        if(stuId==null) return 1;
-        return stuId+1;
+    public int getMaxStuId(){
+        return userMapper.getMaxStuId()+1;
     }
 
-
-
     public void reg(String stuAccount,String stuName,String pwd,String stuNickname,String stuEmail,String stuTelephoto,String majorName,String stu_level){
-        int stuId = getStuId();
+        int stuId = getMaxStuId();
         Student student = new Student();
         student.setStuId(stuId);
         student.setStuAccount(stuAccount);

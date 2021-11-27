@@ -16,10 +16,8 @@ public class AdminService {
     @Autowired
     private AdminMapper adminMapper;
 
-    public Integer getMaxAdminId(){
-        Integer maxId = adminMapper.getMaxAdminId();
-        if(maxId == null) return 1;
-        else return maxId+1;
+    public int getMaxAdminId(){
+        return adminMapper.getMaxAdminId()+1;
     }
 
     public void savaAdminToSession(HttpSession session,Administrator admin){

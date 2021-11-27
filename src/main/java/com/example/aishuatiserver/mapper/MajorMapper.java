@@ -11,11 +11,11 @@ import java.util.List;
 @Mapper
 public interface MajorMapper {
 
-    @Select("select major_Id from major where marjor_name = #{majorName}")
+    @Select("select IFNULL(max(major_Id),0) from major where marjor_name = #{majorName}")
     int getMajorIdByMajorName(String majorName);
 
-    @Select("select Max(Major_Id) from major")
-    Integer getMaxMajorId();
+    @Select("select IFNULL(max(major_Id),0) from major")
+    int getMaxMajorId();
 
     @Select("select major_Id,marjor_Name,department from major ORDER BY department LIMIT #{offset},#{size}")
     List<Major> getAllMajor(int offset,int size);

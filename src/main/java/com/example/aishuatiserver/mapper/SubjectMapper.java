@@ -12,8 +12,8 @@ import java.util.List;
 @Mapper
 public interface SubjectMapper {
 
-    @Select("select max(subject_Id) from subject")
-    Integer getMaxSubjectId();
+    @Select("select IFNULL(max(subject_Id),0) from subject")
+    int getMaxSubjectId();
 
 
     @Insert("insert into subject values(#{subjectId},#{majorId},#{subjectName},#{subjectLevel})")

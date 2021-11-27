@@ -22,7 +22,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @RequestMapping(value = "reg", method = RequestMethod.POST)
+    @RequestMapping(value = "/reg", method = RequestMethod.POST)
     public Map<String, Object> reg(
             @RequestParam(value = "adminAccount") String adminAccount,
             @RequestParam(value = "adminName") String adminName,
@@ -55,7 +55,7 @@ public class AdminController {
         return ResponseConstant.V_USER_LOGIN_SUCCESS;
     }
 
-    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public Map<String, Object> logout(
             HttpServletRequest request
     ) {
@@ -75,7 +75,7 @@ public class AdminController {
         return ResponseConstant.V_UPDATE_SUCCESS;
     }
 
-    @RequestMapping(value = "updateMyPwd", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateMyPwd", method = RequestMethod.POST)
     public Map<String, Object> updateMyPwd(
             @RequestParam(value = "pwd1") String pwd1,
             @RequestParam(value = "pwd2") String pwd2,

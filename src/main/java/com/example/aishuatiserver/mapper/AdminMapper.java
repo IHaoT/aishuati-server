@@ -13,7 +13,7 @@ public interface AdminMapper {
     @Insert("insert into administrator(Administrator_Id,Administrator_account,Administrator_Name,Administrator_Pwd,Administrator_email,Administrator_telephone  ,Administrator_createTime,state) values(#{Administrator_id},#{Administrator_Account},#{Administrator_name},#{Administrator_pwd},#{Administrator_email},#{Administrator_telephone},#{Administrator_createTime},#{state})")
     void reg(Administrator administrator);
 
-    @Select("select max(Administrator_Id) from administrator")
+    @Select("select IFNULL(max(Administrator_Id),0) from administrator")
     Integer getMaxAdminId();
 
     @Select("select Administrator_id,Administrator_Account,Administrator_name,Administrator_pwd,Administrator_email,Administrator_telephone,Administrator_createTime,state from administrator where administrator_Account = #{aminAccount}")

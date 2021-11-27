@@ -16,9 +16,7 @@ public class SubjectService {
     private SubjectMapper subjectMapper;
 
     public Integer getMaxSubjectId(){
-        Integer maxId = subjectMapper.getMaxSubjectId();
-        if(maxId == null) return 1;
-        return maxId+1;
+        return subjectMapper.getMaxSubjectId()+1;
     }
 
     public boolean isHad(String subjectName,int majorId){

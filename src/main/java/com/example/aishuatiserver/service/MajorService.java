@@ -15,9 +15,7 @@ public class MajorService {
     private MajorMapper majorMapper;
 
     public Integer getMaxMajorId(){
-        Integer max = majorMapper.getMaxMajorId();
-        if(max==null) return 0;
-        else return max+1;
+        return majorMapper.getMaxMajorId()+1;
     }
 
     public int getMajorIdByMajorName(String MajorName){
@@ -33,7 +31,7 @@ public class MajorService {
     }
 
     public void addMajor(String majorName,String department){
-        int majorId = getMaxMajorId()+1;
+        int majorId = getMaxMajorId();
         majorMapper.addMajor(majorId,majorName,department);
     }
 
