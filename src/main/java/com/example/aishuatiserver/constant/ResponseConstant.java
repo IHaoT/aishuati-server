@@ -12,10 +12,12 @@ public class ResponseConstant {
     public static final Map<String, Object> X_USER_LOGIN_FIRST = BaseResponsePackageUtil.errorMessage("请先登录");
     public static final Map<String, Object> X_USER_WRONG_PASSWORD = BaseResponsePackageUtil.errorMessage("用户名或密码错误");
     public static final Map<String, Object> X_USER_ALREADY_EXISTS = BaseResponsePackageUtil.errorMessage("用户已存在");
+    public static final Map<String, Object> X_ALREADY_EXISTS = BaseResponsePackageUtil.errorMessage("请勿重复添加");
 
     public static final Map<String, Object> V_USER_LOGIN_SUCCESS = BaseResponsePackageUtil.succeedMessage("登录成功");
     public static final Map<String, Object> V_USER_LOGOUT_SUCCESS = BaseResponsePackageUtil.succeedMessage("退出成功");
     public static final Map<String, Object> V_USER_REGISTER_SUCCESS = BaseResponsePackageUtil.succeedMessage("注册成功");
+    public static final Map<String, Object> V_USER_SEND_SUCCESS = BaseResponsePackageUtil.succeedMessage("发送成功");
 
     public static final Map<String, Object> X_ACCESS_DENIED = BaseResponsePackageUtil.errorMessage("访问受限", 403);
 
@@ -42,14 +44,18 @@ public class ResponseConstant {
     public static final Map<String, Object> X_UPDATE_FAILED = BaseResponsePackageUtil.errorMessage("更新失败");
     public static final Map<String, Object> X_DELETE_FAILED = BaseResponsePackageUtil.errorMessage("删除失败");
     public static final Map<String, Object> X_ADD_FAILED = BaseResponsePackageUtil.errorMessage("新增失败");
+    public static final Map<String, Object> X_REPLACE_PWD = BaseResponsePackageUtil.errorMessage("输入两次密码不一致");
 
     // Any success
     public static final Map<String, Object> V_UPDATE_SUCCESS = BaseResponsePackageUtil.succeedMessage("更新成功");
     public static final Map<String, Object> V_DELETE_SUCCESS = BaseResponsePackageUtil.succeedMessage("删除成功");
     public static final Map<String, Object> V_ADD_SUCCESS = BaseResponsePackageUtil.succeedMessage("新增成功");
+    public static final Map<String, Object> V_SUBMIT_SUCCESS = BaseResponsePackageUtil.succeedMessage("新增成功");
 
     // Judgehost
     public static final Map<String, Object> X_JUDGEHOST_DUE = BaseResponsePackageUtil.errorMessage("验证过期", 700);
+    public static final Map<String, Object> X_JUDGERIGHT = BaseResponsePackageUtil.errorMessage("答案正确",200);
+    public static final Map<String, Object> X_JUDGEWORING = BaseResponsePackageUtil.errorMessage("答案错误",200);
 
     // Other
     public static final Map<String, Object> X_CUT_HAIR_BY_SELF = BaseResponsePackageUtil.errorMessage("不能给自己剪头发！");

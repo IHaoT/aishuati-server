@@ -1,6 +1,6 @@
 spring:
   datasource:
-    name: freshmanager  #????
+    name: aishuati  #????
     url: jdbc:mysql://114.55.177.229:3306/aishuati?useUnicode=true&useSSL=false&serverTimezone = GMT #url
     username: root  #???
     password: root  #??
@@ -8,3 +8,7 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml  #配置映射文件
   type-aliases-package: com.example.aishuati.JavaBean #配置实体类
+
+zuccoj:
+  upload:
+    files=/home/zuccoj/files/: /home/aishuati
