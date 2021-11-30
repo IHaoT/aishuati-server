@@ -7,9 +7,10 @@ import java.util.Date;
 
 @Data
 public class Submit {
-    private int submit;
+    private int submitId;
+    private int stuId;
     private int problemId;
     private int result;
     private Date submitTime;
-    private int ans;  //自己提交答案
+    private int mySubmit;  //自己提交答案
 }

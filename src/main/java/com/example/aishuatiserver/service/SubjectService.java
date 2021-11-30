@@ -35,13 +35,21 @@ public class SubjectService {
         subjectMapper.addSubject(subject);
     }
 
-    public List<SubjectInfo> showSubjectList(int stuId){
-        List<SubjectInfo> list = subjectMapper.showSubjectList(stuId);
+    public List<SubjectInfo> showSubjectList(int stuId,int page,int size){
+        List<SubjectInfo> list = subjectMapper.showSubjectList(stuId,(page-1)*size,size);
         return list;
     }
 
-    public void choiceSubject(){
-
+    public int getSubjectIdByName(String subjectName){
+        return subjectMapper.getSubjectIdByName(subjectName);
     }
 
+    public void choiceSubject(int stuId,String subjectName){
+        int subjectId = getSubjectIdByName(subjectName);
+        subjectMapper.choiceSubject(stuId,subjectId);
+    }
+
+    public List<SubjectInfo> showMySelectSubject(int stuId,int page,int size){
+        return subjectMapper.showMySelectSubject(stuId,(page-1)*size,size);
+    }
 }

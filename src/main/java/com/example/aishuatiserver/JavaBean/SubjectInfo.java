@@ -7,6 +7,6 @@ import lombok.Data;
 public class SubjectInfo {
     private int subjectId;
     private String subjectName;
-    private int majorName;
+    private String majorName;
     private String subjectLevel;
 }

@@ -1,16 +1,15 @@
 package com.example.aishuatiserver.controller;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.example.aishuatiserver.JavaBean.Administrator;
 import com.example.aishuatiserver.constant.InitPwd;
 import com.example.aishuatiserver.constant.PermissionLevel;
 import com.example.aishuatiserver.constant.ResponseConstant;
 import com.example.aishuatiserver.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -24,12 +23,13 @@ public class AdminController {
 
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
     public Map<String, Object> reg(
-            @RequestParam(value = "adminAccount") String adminAccount,
-            @RequestParam(value = "adminName") String adminName,
-            @RequestParam(value = "adminEmail") String adminEmail,
-            @RequestParam(value = "adminTelephoto") String adminTelephoto,
+            @RequestBody JSONObject p,
             HttpServletRequest request
     ) {
+        String adminAccount = p.getString("adminAccount");
+        String adminName = p.getString("adminName");
+        String adminEmail = p.getString("adminEmail");
+        String adminTelephoto = p.getString("adminTelephoto");
         if (!adminService.checkPermission(request.getSession(), PermissionLevel.SUPER_ADMIN)) {
             return ResponseConstant.X_ACCESS_DENIED;
         }
@@ -40,10 +40,11 @@ public class AdminController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Map<String, Object> login(
-            @RequestParam(value = "adminAccount") String adminAccount,
-            @RequestParam(value = "adminPwd") String adminPwd,
+            @RequestBody JSONObject p,
             HttpServletRequest request
     ) {
+        String adminAccount = p.getString("adminAccount");
+        String adminPwd = p.getString("adminPwd");
         Administrator admin = adminService.getAdminByAdminAccount(adminAccount);
         if (admin == null) {
             return ResponseConstant.X_USER_NOT_FOUND;
@@ -65,9 +66,10 @@ public class AdminController {
 
     @RequestMapping(value = "/updateState", method = RequestMethod.POST)
     public Map<String, Object> updateState(
-            @RequestParam(value = "adminId") int adminId,
+            @RequestBody JSONObject p,
             HttpServletRequest request
     ) {
+        int adminId = p.getInteger("adminId");
         if (!adminService.checkPermission(request.getSession(), PermissionLevel.SUPER_ADMIN)) {
             return ResponseConstant.X_ACCESS_DENIED;
         }
@@ -77,10 +79,11 @@ public class AdminController {
 
     @RequestMapping(value = "/updateMyPwd", method = RequestMethod.POST)
     public Map<String, Object> updateMyPwd(
-            @RequestParam(value = "pwd1") String pwd1,
-            @RequestParam(value = "pwd2") String pwd2,
+            @RequestBody JSONObject p,
             HttpServletRequest request
     ) {
+        String pwd1 = p.getString("pwd1");
+        String pwd2 = p.getString("pwd2");
         if (!pwd1.equals(pwd2)) {
             return ResponseConstant.X_REPLACE_PWD;
         }
@@ -92,11 +95,12 @@ public class AdminController {
 
     @RequestMapping(value = "/updateMyInfo", method = RequestMethod.POST)
     public Map<String, Object> updateMyInfo(
-            @RequestParam(value = "adminEmail") String email,
-            @RequestParam(value = "adminTelephoto") String telephoto,
-            @RequestParam(value = "introduce") String introduce,
+            @RequestBody JSONObject p,
             HttpServletRequest request
     ) {
+        String email = p.getString("email");
+        String telephoto = p.getString("adminTelephoto");
+        String introduce = p.getString("introduce");
         int adminId = adminService.getAdminIdFromSession(request.getSession());
         adminService.updateMyInfo(email, telephoto, introduce, adminId);
         return ResponseConstant.V_UPDATE_SUCCESS;

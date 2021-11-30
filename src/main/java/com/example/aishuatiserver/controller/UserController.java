@@ -1,6 +1,7 @@
 package com.example.aishuatiserver.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.aishuatiserver.JavaBean.StuInfo;
 import com.example.aishuatiserver.JavaBean.Student;
 import com.example.aishuatiserver.constant.EventType;
@@ -9,6 +10,7 @@ import com.example.aishuatiserver.mapper.EventLogMapper;
 import com.example.aishuatiserver.service.EventLogService;
 import com.example.aishuatiserver.service.UserService;
 import com.example.aishuatiserver.util.BaseResponsePackageUtil;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +32,10 @@ public class UserController {
 
     @RequestMapping(value = "/getAllStuInfo", method = RequestMethod.GET)
     private Map<String,Object> getAllStuInfo(
-            @RequestParam(value = "page") int page,
-            @RequestParam(value = "pageSize") int pageSize
+            @RequestBody JSONObject p
     ) {
+        int page = p.getInteger("page");
+        int pageSize = p.getInteger("pageSize");
         List<StuInfo> list = userService.getAllStu(page,pageSize);
         return BaseResponsePackageUtil.baseData(list);
     }
@@ -40,16 +43,17 @@ public class UserController {
 
     @RequestMapping(value = "/rsg",method = RequestMethod.POST)
     private Map<String,Object> res(
-            @RequestParam(value = "stuAccount") String stuAccount,
-            @RequestParam(value = "stuName",required = false) String stuName,
-            @RequestParam(value = "pwd1") String pwd1,
-            @RequestParam(value = "pwd2") String pwd2,
-            @RequestParam(value = "stuNickname") String stuNickname,
-            @RequestParam(value = "stuEmail",required = false) String stuEmail,
-            @RequestParam(value = "stuTelephoto",required = false) String stuTelephoto,
-            @RequestParam(value = "majorName") String majorName,
-            @RequestParam(value = "stu_level") String stu_level
+            @RequestBody JSONObject p
     ){
+        String stuAccount = p.getString("stuAccount");
+        String stuName = p.getString("stuName");
+        String pwd1 = p.getString("pwd1");
+        String pwd2 = p.getString("pwd2");
+        String stuNickname = p.getString("stuNickName");
+        String stuEmail = p.getString("stuEmail");
+        String stuTelephoto = p.getString("stuTelephoto");
+        String majorName = p.getString("majorName");
+        String stu_level = p.getString("stu_level");
         if(!pwd1.equals(pwd2)){
             return ResponseConstant.X_REPLACE_PWD;
         }
@@ -62,16 +66,17 @@ public class UserController {
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     private Map<String,Object> login(
-            @RequestParam(value = "stuAccount") String stuAccount,
-            @RequestParam(value = "stuPwd") String stuPwd,
+            @RequestBody JSONObject p,
             HttpServletRequest request
     ){
+        String stuAccount = p.getString("stuAccount");
+        String stuPwd = p.getString("stuPwd");
         Student stu = userService.getStuByAccount(stuAccount);
         if(stu == null){
             return ResponseConstant.X_USER_NOT_FOUND;
         }
         if(!userService.check(stu,stuPwd)){
-            return ResponseConstant.X_USER_WRONG_PASSWORD;
+            return BaseResponsePackageUtil.errorMessage("密码输入错误!");
         }
         eventLogService.addLog(stu, EventType.LOGIN);
         userService.saveUserToSession(request.getSession(),stu);
@@ -98,12 +103,13 @@ public class UserController {
 
     @RequestMapping(value = "changeMyInfo", method = RequestMethod.POST)
     public Map<String,Object> changeMyInfo(
-            @RequestParam(value = "stuNickName") String newStuNickName,
-            @RequestParam(value = "stuEmail",required = false) String newStuEmail,
-            @RequestParam(value = "stuTelephoto",required = false) String newStuTelephoto,
-            @RequestParam(value = "majorName") String majorName,
+            @RequestBody JSONObject p,
             HttpServletRequest request
     ){
+        String newStuNickName = p.getString("stuNickName");
+        String newStuEmail = p.getString("stuEmail");
+        String newStuTelephoto = p.getString("stuTelephoto");
+        String majorName = p.getString("majorName");
         int stuId = userService.getStuIdBySession(request.getSession());
         if(newStuNickName.equals("")){
             return BaseResponsePackageUtil.errorMessage("用户昵称不能为空");
@@ -114,12 +120,15 @@ public class UserController {
 
     @RequestMapping(value = "changeMyPwd", method = RequestMethod.POST)
     public Map<String,Object> changeMyPwd(
-            @RequestParam(value = "pwd1") String pwd1,
-            @RequestParam(value = "pwd2") String pwd2,
+            @RequestBody JSONObject p,
             HttpServletRequest request
     ){
+        String pwd1 = p.getString("pwd1");
+        String pwd2 = p.getString("pwd2");
         int stuId = userService.getStuIdBySession(request.getSession());
         String stuAccount = userService.getStuAccountBySession(request.getSession());
+//        int stuId = 1;
+//        String stuAccount = "31901172";
         if(!pwd1.equals(pwd2)) {
             return ResponseConstant.X_REPLACE_PWD;
         }
