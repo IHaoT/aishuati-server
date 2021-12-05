@@ -10,6 +10,7 @@ import com.example.aishuatiserver.service.AdminService;
 import com.example.aishuatiserver.service.NewsService;
 import com.example.aishuatiserver.service.UserService;
 import com.example.aishuatiserver.util.BaseResponsePackageUtil;
+import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,13 +57,13 @@ public class NewsController {
             HttpServletRequest request
     ){
         int senderId = p.getInteger("senderId");
-        int receiverId = p.getInteger("receiverId");
+        int receiverId = userService.getStuIdBySession(request.getSession());
         Date date = p.getDate("date");
         newsService.readNews(senderId,receiverId,date);
         return BaseResponsePackageUtil.succeedMessage("消息已读");
     }
 
-    @RequestMapping(value = "showMyNews", method = RequestMethod.GET)
+    @RequestMapping(value = "/showMyNews", method = RequestMethod.POST)
     public Map<String,Object> showMyNews(
             @RequestBody JSONObject p,
             HttpServletRequest request
@@ -70,10 +71,14 @@ public class NewsController {
         int stuId = userService.getStuIdBySession(request.getSession());
         int page = p.getInteger("page");
         int pageSize = p.getInteger("pageSize");
-        return BaseResponsePackageUtil.baseData(newsService.showMyNews(stuId,page,pageSize));
+        return BaseResponsePackageUtil.baseData(
+                ImmutableMap.of(
+                    "total",newsService.showMyNewsCount(stuId),
+                    "data",newsService.showMyNews(stuId,page,pageSize)
+                ));
     }
 
-    @RequestMapping(value = "showMyAllNews", method = RequestMethod.GET)
+    @RequestMapping(value = "/showMyAllNews", method = RequestMethod.POST)
     public Map<String,Object> showMyAllNews(
             @RequestBody JSONObject p,
             HttpServletRequest request
@@ -81,6 +86,10 @@ public class NewsController {
         int stuId = userService.getStuIdBySession(request.getSession());
         int page = p.getInteger("page");
         int pageSize = p.getInteger("pageSize");
-        return BaseResponsePackageUtil.baseData(newsService.showMyNews(stuId,page,pageSize));
+        return BaseResponsePackageUtil.baseData(
+                ImmutableMap.of(
+                        "total",newsService.showMyAllNewsCount(stuId),
+                        "data",newsService.showMyAllNews(stuId,page,pageSize)
+                ));
     }
 }

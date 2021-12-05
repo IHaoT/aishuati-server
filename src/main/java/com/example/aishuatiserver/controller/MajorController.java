@@ -39,7 +39,7 @@ public class MajorController {
         return ResponseConstant.V_ADD_SUCCESS;
     }
 
-    @RequestMapping(value = "getAllMajor", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAllMajor", method = RequestMethod.GET)
     public Map<String,Object> getAllMajor(
             @RequestBody JSONObject p
     ){

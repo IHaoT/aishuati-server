@@ -30,6 +30,10 @@ public class UserService {
         return userMapper.countStuByAccount(stuAccount) > 0;
     }
 
+    public int getStuCount(){
+        return userMapper.getStuCount();
+    }
+
     public int getMaxStuId(){
         return userMapper.getMaxStuId()+1;
     }

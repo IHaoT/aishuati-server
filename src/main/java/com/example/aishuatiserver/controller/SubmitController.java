@@ -39,7 +39,7 @@ public class SubmitController {
         return ResponseConstant.V_SUBMIT_SUCCESS;
     }
 
-    @RequestMapping(value = "/show/result",method = RequestMethod.GET)
+    @RequestMapping(value = "/show/result",method = RequestMethod.POST)
     public Map<String,Object> showResult(
             @RequestBody JSONObject p,
             HttpServletRequest request
@@ -50,6 +50,9 @@ public class SubmitController {
 //        JSONArray list = p.getJSONArray("list");
 //        List<Integer> list1 = list.toJavaList(Integer.class);
         int stuId = userService.getStuIdBySession(request.getSession());
+        if(!submitService.checkSubmit(problemId,stuId)){
+            return ResponseConstant.X_QUERY_FAILED;
+        }
         if(submitService.showResult(stuId,problemId)){
             return ResponseConstant.X_JUDGERIGHT;
         }

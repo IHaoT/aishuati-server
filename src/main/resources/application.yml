@@ -5,10 +5,22 @@ spring:
     username: root  #???
     password: root  #??
     driver-class-name: com.mysql.cj.jdbc.Driver  #???????
+  session:
+    store-type: none
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml  #配置映射文件
   type-aliases-package: com.example.aishuati.JavaBean #配置实体类
 
-zuccoj:
+server:
+  servlet:
+    session:
+      cookie:
+        secure: true
+
+#fileuploadpath: /home/aishuati-server/files/
+
+#aishuati.upload.files: /home/aishuati-server/files/
+aishuati:
   upload:
-    files=/home/zuccoj/files/: /home/aishuati
+    files: /home/aishuati-server/files/

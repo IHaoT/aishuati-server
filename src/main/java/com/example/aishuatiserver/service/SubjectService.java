@@ -19,6 +19,14 @@ public class SubjectService {
         return subjectMapper.getMaxSubjectId()+1;
     }
 
+    public int getAvailableSubjectCount(int stuId){
+        return subjectMapper.getAvailableSubjectCount(stuId);
+    }
+
+    public int getMySelectCount(int stu){
+        return subjectMapper.getMySelectCount(stu);
+    }
+
     public boolean isHad(String subjectName,int majorId){
         Subject subject = subjectMapper.isHad(subjectName,majorId);
         if(subject == null) return false;

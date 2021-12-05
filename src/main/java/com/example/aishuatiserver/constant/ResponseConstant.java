@@ -43,6 +43,7 @@ public class ResponseConstant {
     public static final Map<String, Object> X_BAD_REQUEST = BaseResponsePackageUtil.errorMessage("请求参数错误", 400);
     public static final Map<String, Object> X_UPDATE_FAILED = BaseResponsePackageUtil.errorMessage("更新失败");
     public static final Map<String, Object> X_DELETE_FAILED = BaseResponsePackageUtil.errorMessage("删除失败");
+    public static final Map<String, Object> X_QUERY_FAILED = BaseResponsePackageUtil.errorMessage("请先提交答案");
     public static final Map<String, Object> X_ADD_FAILED = BaseResponsePackageUtil.errorMessage("新增失败");
     public static final Map<String, Object> X_REPLACE_PWD = BaseResponsePackageUtil.errorMessage("输入两次密码不一致");
 
