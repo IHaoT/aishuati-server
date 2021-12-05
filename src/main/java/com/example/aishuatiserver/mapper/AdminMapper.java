@@ -13,6 +13,12 @@ import java.util.List;
 @Mapper
 public interface AdminMapper {
 
+    /**
+     *  用于添加教师用户
+     * @Author jfy
+     * @Test  czh
+     * @param administrator
+     */
     @Insert("insert into administrator(Administrator_Id,Administrator_account,Administrator_Name,Administrator_Pwd,Administrator_email,Administrator_telephone  ,Administrator_createTime,state) values(#{Administrator_id},#{Administrator_Account},#{Administrator_name},#{Administrator_pwd},#{Administrator_email},#{Administrator_telephone},#{Administrator_createTime},#{state})")
     void reg(Administrator administrator);
 
