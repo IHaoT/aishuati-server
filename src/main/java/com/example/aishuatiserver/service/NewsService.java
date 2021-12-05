@@ -41,4 +41,12 @@ public class NewsService {
     public List<News> showMyAllNews(int stuId,int page,int size){
         return newsMapper.showMyNews(stuId,(page-1)*size,size);
     }
+
+    public int showMyNewsCount(int stuId){
+        return newsMapper.showMyNewsCount(stuId);
+    }
+
+    public int showMyAllNewsCount(int stuId){
+        return newsMapper.showMyAllNewsCount(stuId);
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.aishuatiserver.mapper;
 
 
+import com.example.aishuatiserver.JavaBean.AdminInfo;
+import com.example.aishuatiserver.JavaBean.Administrator;
 import com.example.aishuatiserver.JavaBean.News;
 import org.apache.ibatis.annotations.*;
 
@@ -26,4 +28,11 @@ public interface NewsMapper {
 
     @Select("select sander_Id,receiver_Id,content,createTime,state from news where receiver_Id = #{stuId} order by createTime limit #{offset},#{size}")
     List<News> showMyAllNews(int stuId,int offset,int size);
+
+    @Select("select count(*) from news where receiver_Id = #{stuId} and state = 0")
+    int showMyNewsCount(int stuId);
+
+    @Select("select count(*) from news where receiver_Id = #{stuId}")
+    int showMyAllNewsCount(int stuId);
+
 }

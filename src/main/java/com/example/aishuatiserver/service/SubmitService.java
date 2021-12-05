@@ -18,15 +18,27 @@ public class SubmitService {
         return submitMapper.getMaxSubmitId()+1;
     }
 
+    public void addWrongProblem(int problemId,int stuId,int mySubmit){
+        submitMapper.addWrongProblem(problemId,stuId,mySubmit);
+    }
+
     public void submitProblem(int problemId,int stuId,int mySubmit){
+        int result = judge(problemId,mySubmit);
         Submit submit = new Submit();
         submit.setSubmitId(getMaxSubmitId());
         submit.setStuId(stuId);
         submit.setProblemId(problemId);
-        submit.setResult(judge(problemId,mySubmit));
+        submit.setResult(result);
         submit.setSubmitTime(new Date(System.currentTimeMillis()));
         submit.setMySubmit(mySubmit);
         submitMapper.addRecode(submit);
+        if(result == 0){
+            addWrongProblem(problemId,stuId,mySubmit);
+        }
+    }
+
+    public boolean checkSubmit(int problemId,int stuId){
+        return submitMapper.checkSubmit(problemId,stuId) == 0 ? false : true;
     }
 
     public int judge(int problemId,int mySubmit){

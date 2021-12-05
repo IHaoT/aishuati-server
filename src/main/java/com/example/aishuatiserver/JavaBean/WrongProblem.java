@@ -4,7 +4,8 @@ package com.example.aishuatiserver.JavaBean;
 import lombok.Data;
 
 @Data
-public class ChoiceProblemInfo {
+public class WrongProblem {
+    private int wrongproblem_Id;
     private int problemId;
     private String subjectName;
     private int administratorId;
@@ -16,4 +17,5 @@ public class ChoiceProblemInfo {
     private String choice_D;
     private int ans;
     private String reference;
+    private int lastSubmit;
 }

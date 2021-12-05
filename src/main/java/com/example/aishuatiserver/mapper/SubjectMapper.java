@@ -15,6 +15,9 @@ public interface SubjectMapper {
     @Select("select IFNULL(max(subject_Id),0) from subject")
     int getMaxSubjectId();
 
+    @Select("select count(*) from subject where subject_id in (select subject_id from `subject` where major_id in (select stu_majorId from\n" +
+            " student where stu_Id = #{stu}) and subject_level in (select stu_level from student where stu_Id = #{stu}))")
+    int getAvailableSubjectCount(int stuId);
 
     @Insert("insert into subject values(#{subjectId},#{majorId},#{subjectName},#{subjectLevel})")
     void addSubject(Subject subject);
@@ -30,9 +33,12 @@ public interface SubjectMapper {
             "subject_Id in (select subject_Id from possesse where stu_Id = #{stuId}) limit #{offset},#{size}")
     List<SubjectInfo> showMySelectSubject(int stuId,int offset,int size);
 
+    @Select("select count(*) from subject where subject_Id in (select subject_id from possesse where stu_id = #{stuId})")
+    int getMySelectCount(int stu);
+
     @Insert("insert into possesse values(#{stuId},#{subjectId})")
-    void choiceSubject(int stuId,int subjectId);
+    void choiceSubject(int stuId, int subjectId);
 
     @Select("select subject_Id from subject where subject_Name = #{subjectName}")
-    int getSubjectIdByName(String subjectName);
+    Integer getSubjectIdByName(String subjectName);
 }

@@ -9,6 +9,7 @@ import com.example.aishuatiserver.service.MajorService;
 import com.example.aishuatiserver.service.SubjectService;
 import com.example.aishuatiserver.service.UserService;
 import com.example.aishuatiserver.util.BaseResponsePackageUtil;
+import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +46,7 @@ public class SubjectController {
         return ResponseConstant.V_ADD_SUCCESS;
     }
 
-    @RequestMapping(value = "/getAvailableSubject", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAvailableSubject", method = RequestMethod.POST)
     public Map<String,Object> showSubjectList(
             @RequestBody JSONObject p,
             HttpServletRequest request
@@ -54,10 +55,14 @@ public class SubjectController {
         int pageSize = p.getInteger("pageSize");
         int stuId = userService.getStuIdBySession(request.getSession());
         List<SubjectInfo> list = subjectService.showSubjectList(stuId,page,pageSize);
-        return BaseResponsePackageUtil.baseData(list);
+        return BaseResponsePackageUtil.baseData(
+                ImmutableMap.of(
+                        "total",subjectService.getAvailableSubjectCount(stuId),
+                        "data",list
+                ));
     }
 
-    @RequestMapping(value = "/getMySubject",method = RequestMethod.GET)
+    @RequestMapping(value = "/getMySubject",method = RequestMethod.POST)
     public Map<String,Object> showMySelectSubject(
             @RequestBody JSONObject p,
             HttpServletRequest request
@@ -66,10 +71,11 @@ public class SubjectController {
         int pageSize = p.getInteger("pageSize");
         int stuId = userService.getStuIdBySession(request.getSession());
         List<SubjectInfo> list = subjectService.showMySelectSubject(stuId,page,pageSize);
-        if(list.size()==0){
-            return BaseResponsePackageUtil.errorMessage("暂无选课");
-        }
-        return BaseResponsePackageUtil.baseData(list);
+        return BaseResponsePackageUtil.baseData(
+                ImmutableMap.of(
+                        "total",subjectService.getMySelectCount(stuId),
+                        "data",list
+                ));
     }
 
     @RequestMapping(value = "/select",method = RequestMethod.POST)
@@ -77,7 +83,6 @@ public class SubjectController {
             @RequestBody JSONObject p,
             HttpServletRequest request
     ){
-
         int stuId = userService.getStuIdBySession(request.getSession());
         String subjectName = p.getString("subjectName");
         subjectService.choiceSubject(stuId,subjectName);

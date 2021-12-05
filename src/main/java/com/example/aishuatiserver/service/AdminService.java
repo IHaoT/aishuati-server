@@ -1,6 +1,7 @@
 package com.example.aishuatiserver.service;
 
 
+import com.example.aishuatiserver.JavaBean.AdminInfo;
 import com.example.aishuatiserver.JavaBean.Administrator;
 import com.example.aishuatiserver.mapper.AdminMapper;
 import com.example.aishuatiserver.util.PasswordUtil;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class AdminService {
@@ -86,5 +88,26 @@ public class AdminService {
         adminMapper.updateMyInfo(email,telephoto,introduce,adminId);
     }
 
+    public int getAdminCount(){
+        return adminMapper.getAdminCount();
+    }
+
+    public List<AdminInfo> getAllAdminInfo(int page,int size){
+        return adminMapper.getAllAdminInfo((page-1)*size,size);
+    }
+
+    public AdminInfo getAdminByAdminId(int adminId){
+        return  adminMapper.getAdminByAdminId(adminId);
+    }
+
+    public void changeTeacherInfo(int administrator_id,String administrator_name,String administrator_email,String administrator_telephone,String administrator_account){
+        AdminInfo adminInfo = new AdminInfo();
+        adminInfo.setAdministrator_account(administrator_account);
+        adminInfo.setAdministrator_id(administrator_id);
+        adminInfo.setAdministrator_name(administrator_name);
+        adminInfo.setAdministrator_email(administrator_email);
+        adminInfo.setAdministrator_telephone(administrator_telephone);
+        adminMapper.changeTeacherInfo(adminInfo);
+    }
 
 }

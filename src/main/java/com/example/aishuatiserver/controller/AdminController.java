@@ -8,6 +8,8 @@ import com.example.aishuatiserver.constant.InitPwd;
 import com.example.aishuatiserver.constant.PermissionLevel;
 import com.example.aishuatiserver.constant.ResponseConstant;
 import com.example.aishuatiserver.service.AdminService;
+import com.example.aishuatiserver.util.BaseResponsePackageUtil;
+import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +32,7 @@ public class AdminController {
         String adminName = p.getString("adminName");
         String adminEmail = p.getString("adminEmail");
         String adminTelephoto = p.getString("adminTelephoto");
-        if (!adminService.checkPermission(request.getSession(), PermissionLevel.SUPER_ADMIN)) {
+        if (!adminService.checkPermission(request.getSession(), PermissionLevel.SUPER_ADMIN)){
             return ResponseConstant.X_ACCESS_DENIED;
         }
         String pwd1 = InitPwd.INITIAL_PWD;
@@ -64,17 +66,23 @@ public class AdminController {
         return ResponseConstant.V_USER_LOGOUT_SUCCESS;
     }
 
-    @RequestMapping(value = "/updateState", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateState/{adminId}", method = RequestMethod.POST)
     public Map<String, Object> updateState(
-            @RequestBody JSONObject p,
+            @PathVariable(value = "adminId") int adminId,
             HttpServletRequest request
     ) {
-        int adminId = p.getInteger("adminId");
         if (!adminService.checkPermission(request.getSession(), PermissionLevel.SUPER_ADMIN)) {
             return ResponseConstant.X_ACCESS_DENIED;
         }
         adminService.updateState(adminId);
         return ResponseConstant.V_UPDATE_SUCCESS;
+    }
+
+    @RequestMapping(value = "/getAdminByAdminId/{adminId}",method = RequestMethod.POST)
+    public Map<String,Object> getAdminByAdminId(
+            @PathVariable(value = "adminId") int adminId
+    ){
+        return BaseResponsePackageUtil.baseData(adminService.getAdminByAdminId(adminId));
     }
 
     @RequestMapping(value = "/updateMyPwd", method = RequestMethod.POST)
@@ -103,6 +111,36 @@ public class AdminController {
         String introduce = p.getString("introduce");
         int adminId = adminService.getAdminIdFromSession(request.getSession());
         adminService.updateMyInfo(email, telephoto, introduce, adminId);
+        return ResponseConstant.V_UPDATE_SUCCESS;
+    }
+
+    @RequestMapping(value = "/getAllAdminInfo/{page}/{pageSize}",method = RequestMethod.POST)
+    public Map<String,Object> getAllAdminInfo(
+            @PathVariable(value = "page") int page,
+            @PathVariable(value = "pageSize") int pageSize,
+            HttpServletRequest request
+    ){
+        return BaseResponsePackageUtil.baseData(
+                ImmutableMap.of(
+                        "total",adminService.getAdminCount(),
+                        "rows",adminService.getAllAdminInfo(page,pageSize)
+                ));
+    }
+
+    @RequestMapping(value = "/changeTeacherInfo",method = RequestMethod.POST)
+    public Map<String,Object> changeAdminInfo(
+            @RequestBody JSONObject p,
+            HttpServletRequest request
+    ){
+        int adminId = p.getInteger("adminId");
+        String adminName = p.getString("adminName");
+        String adminEmail = p.getString("adminEmail");
+        String adminTelephone = p.getString("adminTelephone");
+        String adminAccount = p.getString("adminAccount");
+        if (!adminService.checkPermission(request.getSession(), PermissionLevel.SUPER_ADMIN)) {
+            return ResponseConstant.X_ACCESS_DENIED;
+        }
+        adminService.changeTeacherInfo(adminId,adminName,adminEmail,adminTelephone,adminAccount);
         return ResponseConstant.V_UPDATE_SUCCESS;
     }
 }

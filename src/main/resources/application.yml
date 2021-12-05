@@ -17,3 +17,10 @@ server:
     session:
       cookie:
         secure: true
+
+#fileuploadpath: /home/aishuati-server/files/
+
+#aishuati.upload.files: /home/aishuati-server/files/
+aishuati:
+  upload:
+    files: /home/aishuati-server/files/

@@ -3,6 +3,7 @@ package com.example.aishuatiserver.mapper;
 import com.example.aishuatiserver.JavaBean.Submit;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.Date;
@@ -23,4 +24,10 @@ public interface SubmitMapper {
     @Select("select result from submit where stu_id = #{stuId} and problem_Id = #{problemId} and  submit_time in (select max(submit_time) from submit\n" +
             " where stu_id = #{stuId} and problem_Id = #{problemId})")
     int showResult(int problemId,int stuId);
+
+    @Select("select count(*) from submit where problem_Id = #{problemId} and stu_Id = #{stuId}")
+    int checkSubmit(int problemId,int stuId);
+
+    @Insert("Insert into wrongProblem (problem_Id,stu_Id,mySubmit) values(#{problemId},#{stuId},#{mySubmit})")
+    int addWrongProblem(int problemId,int stuId,int mySubmit);
 }

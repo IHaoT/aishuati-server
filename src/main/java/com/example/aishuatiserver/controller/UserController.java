@@ -11,6 +11,7 @@ import com.example.aishuatiserver.service.EventLogService;
 import com.example.aishuatiserver.service.UserService;
 import com.example.aishuatiserver.util.BaseResponsePackageUtil;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -30,14 +31,17 @@ public class UserController {
     @Autowired
     private EventLogService eventLogService;
 
-    @RequestMapping(value = "/getAllStuInfo", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAllStuInfo/{page}/{size}", method = RequestMethod.POST)
     private Map<String,Object> getAllStuInfo(
-            @RequestBody JSONObject p
+            @PathVariable(value = "page") int page,
+            @PathVariable(value = "size") int pageSize
     ) {
-        int page = p.getInteger("page");
-        int pageSize = p.getInteger("pageSize");
         List<StuInfo> list = userService.getAllStu(page,pageSize);
-        return BaseResponsePackageUtil.baseData(list);
+        return BaseResponsePackageUtil.baseData(
+                ImmutableMap.of(
+                        "total",userService.getStuCount(),
+                        "rows",list
+                ));
     }
 
 
@@ -127,8 +131,6 @@ public class UserController {
         String pwd2 = p.getString("pwd2");
         int stuId = userService.getStuIdBySession(request.getSession());
         String stuAccount = userService.getStuAccountBySession(request.getSession());
-//        int stuId = 1;
-//        String stuAccount = "31901172";
         if(!pwd1.equals(pwd2)) {
             return ResponseConstant.X_REPLACE_PWD;
         }

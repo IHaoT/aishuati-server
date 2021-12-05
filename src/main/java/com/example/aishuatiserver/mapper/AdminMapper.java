@@ -1,11 +1,14 @@
 package com.example.aishuatiserver.mapper;
 
 
+import com.example.aishuatiserver.JavaBean.AdminInfo;
 import com.example.aishuatiserver.JavaBean.Administrator;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import java.util.List;
 
 @Mapper
 public interface AdminMapper {
@@ -27,4 +30,17 @@ public interface AdminMapper {
 
     @Update("update administrator set Administrator_email = #{email},Administrator_telephone = #{telephoto},introduce = #{introduce} where Administrator_id = #{adminId}")
     void updateMyInfo(String email,String telephoto,String introduce,int adminId);
+
+    @Select("select count(*) from administrator")
+    int getAdminCount();
+
+    @Select("select Administrator_id,Administrator_account,Administrator_name,Administrator_email,Administrator_telephone,Administrator_createtime,state from administrator limit #{offset},#{size}")
+    List<AdminInfo> getAllAdminInfo(int offset,int size);
+
+    @Update("update administrator set Administrator_name = #{Administrator_name},Administrator_email = #{Administrator_email},Administrator_telephone = #{Administrator_telephone} where Administrator_Id = #{Administrator_id}")
+    void changeTeacherInfo(AdminInfo adminInfo);
+
+    @Select("select Administrator_id,Administrator_account,Administrator_name,Administrator_email,Administrator_telephone,Administrator_createtime,state from administrator where Administrator_id = #{adminId}")
+    AdminInfo getAdminByAdminId(int adminId);
+
 }
