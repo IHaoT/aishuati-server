@@ -39,8 +39,8 @@ public interface ProblemMapper {
     int getMyAllSubjectiveProblemCount(int stuId);
 
     @Select("select problem_Id as problemId,subject_Name as subjectName,Administrator_id as administratorId,difficult,info_text_content,reference " +
-            "from problem left join (select stu_Id,possesse.subject_Id,subject_name from possesse left join subject on possesse.subject_id = subject.subject_Id where stu_id = #{stuId}) as a on problem.subject_id = a.subject_Id " +
-            "where problem_type = 2 limit #{offSize},#{size}")
+            "from problem right join (select stu_Id,possesse.subject_Id,subject_name from possesse left join subject on possesse.subject_id = subject.subject_Id where stu_id = #{stuId}) as a on problem.subject_id = a.subject_Id " +
+            "where problem_type = 2 and stu_id = #{stuId} limit #{offSize},#{size}")
     List<SubjectiveProblemInfo> getAllSubjectiveProblemInfo(int stuId,int offSize,int size);
 
     @Select("<script> " +

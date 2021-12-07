@@ -14,6 +14,6 @@ public class ChoiceProblemInfo {
     private String choice_B;
     private String choice_C;
     private String choice_D;
-    private int ans;
+    private int correct;
     private String reference;
 }

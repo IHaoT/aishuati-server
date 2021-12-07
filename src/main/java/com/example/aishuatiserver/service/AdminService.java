@@ -34,7 +34,9 @@ public class AdminService {
         session.removeAttribute("adminAccount");
     }
 
-    public int getAdminIdFromSession(HttpSession session){
+    public Integer getAdminIdFromSession(HttpSession session){
+        Integer adminId = (Integer) session.getAttribute("adminId");
+        if (adminId == null) return null;
         return (int) session.getAttribute("adminId");
     }
 
@@ -102,11 +104,11 @@ public class AdminService {
 
     public void changeTeacherInfo(int administrator_id,String administrator_name,String administrator_email,String administrator_telephone,String administrator_account){
         AdminInfo adminInfo = new AdminInfo();
-        adminInfo.setAdministrator_account(administrator_account);
-        adminInfo.setAdministrator_id(administrator_id);
-        adminInfo.setAdministrator_name(administrator_name);
-        adminInfo.setAdministrator_email(administrator_email);
-        adminInfo.setAdministrator_telephone(administrator_telephone);
+        adminInfo.setAdminAccount(administrator_account);
+        adminInfo.setAdminId(administrator_id);
+        adminInfo.setAdminName(administrator_name);
+        adminInfo.setAdminEmail(administrator_email);
+        adminInfo.setAdminTelephoto(administrator_telephone);
         adminMapper.changeTeacherInfo(adminInfo);
     }
 
