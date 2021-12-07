@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-@Mapper
+@Mapper   //我不是写写题目这一块的测试
 public interface ProblemMapper {
 
     @Select("select count(*) from problem where problem_type = 1 and subject_Id in (select subject_Id from possesse where stu_Id = #{stuId})")
@@ -100,7 +100,7 @@ public interface ProblemMapper {
     @Select("select wrongproblem_Id,a.problem_Id as problemId,subject_Name as subjectName,Administrator_id as administratorId,difficult,\n" +
             "info_text_content,correct as ans,lastSubmit,choice_A,choice_B,choice_C,choice_D,reference from\n" +
             "((select wrongProblem_Id,problem_Id,stu_Id,mySubmit as lastSubmit from wrongProblem where stu_Id = #{stuId} and wrongProblem_Id in \n" +
-            "(select max(wrongProblem_Id) from wrongProblem where stu_Id = 2 group by problem_Id)) as a left join \n" +
+            "(select max(wrongProblem_Id) from wrongProblem where stu_Id = #{stuId} group by problem_Id)) as a left join \n" +
             "(select problem_Id,subject_Name,Administrator_id,difficult,info_text_content,correct,choice_A,choice_B,choice_C,choice_D,reference " +
             "from problem left join `subject` on `subject`.subject_Id = problem.subject_Id) as b on a.problem_Id = b.problem_Id) limit #{offset},#{size}")
     List<WrongProblem> getWrongProblem(int stuId,int offset,int size);
@@ -109,7 +109,7 @@ public interface ProblemMapper {
                 "select wrongproblem_Id,a.problem_Id as problemId,subject_Name as subjectName,Administrator_id as administratorId,difficult,\n" +
                 "info_text_content,correct as ans,lastSubmit,choice_A,choice_B,choice_C,choice_D,reference from\n" +
                 "((select wrongProblem_Id,problem_Id,stu_Id,mySubmit as lastSubmit from wrongProblem where stu_Id = #{stuId} and wrongProblem_Id in \n" +
-                "(select max(wrongProblem_Id) from wrongProblem where stu_Id = 2 group by problem_Id)) as a left join \n" +
+                "(select max(wrongProblem_Id) from wrongProblem where stu_Id = #{stuId} group by problem_Id)) as a left join \n" +
                 "(select problem_Id,subject_Name,Administrator_id,difficult,info_text_content,correct,choice_A,choice_B,choice_C,choice_D,reference from problem left join `subject` on `subject`.subject_Id = problem.subject_Id) as b on a.problem_Id = b.problem_Id) "+
                 "<where>" +
                 "<if test = \"subjectName!=null\">subject_Name = #{subjectName} </if>"+
