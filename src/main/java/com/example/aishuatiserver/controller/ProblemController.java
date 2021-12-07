@@ -53,6 +53,8 @@ public class ProblemController {
             @PathVariable(value = "size") int size,
             HttpServletRequest request
     ){
+        Integer adminId = adminService.getAdminIdFromSession(request.getSession());
+        if(adminId == null) return ResponseConstant.X_USER_LOGIN_FIRST;
         List<ChoiceProblemInfo> list = problemService.adminGetAllChoiceProblem(page,size);
         return BaseResponsePackageUtil.baseData(
                 ImmutableMap.of(

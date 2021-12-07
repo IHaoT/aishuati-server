@@ -7,11 +7,11 @@ import java.util.Date;
 
 @Data
 public class AdminInfo {
-    private int Administrator_id;
-    private String Administrator_account;
-    private String Administrator_name;
-    private String Administrator_email;
-    private String Administrator_telephone;
-    private Date Administrator_createtime;
+    private int adminId;
+    private String adminAccount;
+    private String adminName;
+    private String adminEmail;
+    private String adminTelephoto;
+    private Date adminCreateTime;
     private int state;
 }

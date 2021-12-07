@@ -1,7 +1,6 @@
-package com.example.aishuatiserver;
+package com.example.aishuatiserver.mapper;
 
 import com.example.aishuatiserver.JavaBean.Student;
-import com.example.aishuatiserver.mapper.UserMapper;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,15 @@ public class UserMapperTest {
         stu.setStu_level("大三");
         userMapper.reg(stu);
         Assert.assertTrue("reg success", true);
+    }
+
+    @Test
+    public void getStudentById(){
+        Student stu1 = userMapper.getStuByAccount("test01");
+        Assert.assertEquals(stu1.getStuName(),"testName01");
+        Assert.assertEquals(stu1.getStuId(),12);
+        Assert.assertEquals(stu1.getStuNickName(),"testNickName01");
+        Assert.assertEquals(stu1.getStu_level(),"大三");
     }
 
 }

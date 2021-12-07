@@ -13,6 +13,7 @@ import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jws.Oneway;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
@@ -143,4 +144,5 @@ public class AdminController {
         adminService.changeTeacherInfo(adminId,adminName,adminEmail,adminTelephone,adminAccount);
         return ResponseConstant.V_UPDATE_SUCCESS;
     }
+
 }

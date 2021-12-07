@@ -14,7 +14,7 @@ public interface UserMapper {
 //    @Options(useGeneratedKeys = true, keyColumn = "stuId",keyProperty = "stuId")
     void reg(Student student);
 
-    @Select("select stu_Id as stuId,stu_Name as stuName,stu_Nickname as stuNickName ,stu_email as stuEmail,stu_telphoto as stuTelephoto,marjor_Name as majorName,stu_level from student left join major on student.stu_majorId = major.major_Id LIMIT #{offset},#{size}")
+    @Select("select stu_Id as stuId,stu_account as stuAccount,stu_Name as stuName,stu_Nickname as stuNickName ,stu_email as stuEmail,stu_telphoto as stuTelephoto,marjor_Name as majorName,stu_level from student left join major on student.stu_majorId = major.major_Id LIMIT #{offset},#{size}")
     List<StuInfo> getAllStu(int offset, int size);
 
     @Select("select count(*) from student")

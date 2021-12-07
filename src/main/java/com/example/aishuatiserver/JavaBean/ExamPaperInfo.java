@@ -7,10 +7,12 @@ import java.util.Date;
 
 @Data
 public class ExamPaperInfo {  //学生段看到的
-    private String examPaper_name;
+    private int examPaperId;
+    private String examPaperName;
     private String subjectName;
-    private String grade_level;
-    private Date create_time;
-    private String examPaper_from;
+    private int adminId;  // 创建者Id
+    private String level;
     private String examPaperAddress;
+    private Date createTime;
+    private String examPaperFrom;
 }
