@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-@Mapper
+@Mapper   //我不是写写题目这一块的测试
 public interface ProblemMapper {
 
     @Select("select count(*) from problem where problem_type = 1 and subject_Id in (select subject_Id from possesse where stu_Id = #{stuId})")
