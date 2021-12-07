@@ -25,15 +25,15 @@ public class ProblemMapperTests {
     @Test
     public void addChoiceProblem(){
         int problemId = problemMapper.getMaxProblemId();
-        Assert.assertEquals(problemMapper.getMaxProblemId(),6);
-        problemMapper.addChoiceProblem(problemId+1,1,1,1,4,"就撒娇就安心家族空间科学证据奖学金",2,
-                "sds","实打实","萨顶顶","岁数大","的创造性臭小子选择性");
+
+        problemMapper.addChoiceProblem(problemId+1,1,1,1,4,"设F(X)定义域为(1,2),则F(lgx)的定义域为",2,
+                "(0,lg2)","(0,lg2]","(10,100)","(1,2)","该题暂无解析");
     }
 
     @Test
     public void addSubjectiveProblem(){
         int problemId = problemMapper.getMaxProblemId();
-        Assert.assertEquals(problemId,7);
+
         problemMapper.addSubjectiveProblem(problemId+1,1,1,2,4,"才能深刻揭示出你看这些那么在你没出现你","xjznxmnxzmnmnzmmxnnz");
     }
 

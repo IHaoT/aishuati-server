@@ -60,6 +60,13 @@ public class ProblemController {
                         "rows",list
                 ));
     }
+    /**
+     * @author chenzihui
+     * create time: 2021/12/7 21:06
+     * 获取该用户对应的所有单选题列表
+     * @param
+     * @return
+     */
 
     @RequestMapping(value = "/subjective/getAllProblemList", method = RequestMethod.POST)
     public Map<String,Object> getAllSubjectiveProblemInfo(
