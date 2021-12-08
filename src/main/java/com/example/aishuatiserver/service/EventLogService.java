@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class EventLogService {
@@ -29,4 +30,12 @@ public class EventLogService {
         eventLogMapper.addLog(user_event_log);
     }
 
+    public List<User_event_log> getUserLogs(int page,int size){
+        return eventLogMapper.getUserLogs((page-1)*size,size);
+    }
+
+
+    public int getAllLogCount(){
+        return eventLogMapper.getAllLogCount();
+    }
 }

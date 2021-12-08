@@ -49,4 +49,16 @@ public interface UserMapper {
     @Update("update student set stu_password = #{newPwd} where stu_Id = #{stuId}")
     void changeMyPwd(String newPwd,int stuId);
 
+    @Update("<script>" +
+            "update student set stu_NickName = #{stuNickName}, "+
+            "<if test = \"stuEmail != null\">"+
+            "stu_Email = #{stuEmail}, "+
+            "</if>"+
+            "<if test = \"stuTelephoto != null\">"+
+            "stu_telphoto = #{stuTelephoto}, "+
+            "</if>"+
+            "stu_majorId = #{majorId},stu_level = #{stu_level} where stu_Id = #{stuId} "+
+            "</script>")
+    void adminChangeStuInfo(int stuId,String stuName,String stuNickName,String stuEmail,String stuTelephoto,int majorId,String stu_level);
+
 }

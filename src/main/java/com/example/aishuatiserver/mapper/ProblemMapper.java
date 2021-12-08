@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-@Mapper   //我不是写写题目这一块的测试
+@Mapper
 public interface ProblemMapper {
 
     @Select("select count(*) from problem where problem_type = 1 and subject_Id in (select subject_Id from possesse where stu_Id = #{stuId})")
@@ -126,7 +126,8 @@ public interface ProblemMapper {
                 "select count(*) from (select wrongProblem.problem_Id,count(*) from wrongProblem left join problem on wrongProblem.problem_Id = problem.problem_Id " +
                 "where stu_Id = #{stuId} " +
                 "<if test = \"subjectId != null\"> and subject_Id = #{subjectId} </if>" +
-                "<if test = \"problemId != null\"> and wrongProblem.problem_Id = #{problemId} </if>"+
+                "<if test = \"problemId != null\"> and wrongProblem.problem_Id = #{problemId} </if> " +
+                " GROUP BY problem_Id) as a"+
             "</script>")
     int SearchMyWrongProblemCount(int stuId,Integer subjectId,Integer problemId);
 

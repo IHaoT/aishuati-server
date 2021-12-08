@@ -252,7 +252,7 @@ public class ProblemController {
                 ));
     }
 
-    @RequestMapping(value = "/getChoiceProblem/{problemId}")
+    @RequestMapping(value = "/getChoiceProblem/{problemId}",method = RequestMethod.POST)
     public Map<String,Object> getChoiceProblemByProblemId(
             @PathVariable(value = "problemId") int problemId
     ){

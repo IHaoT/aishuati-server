@@ -41,4 +41,7 @@ public interface SubjectMapper {
 
     @Select("select subject_Id from subject where subject_Name = #{subjectName}")
     Integer getSubjectIdByName(String subjectName);
+
+    @Select("select subject_Id as subjectId,major_Id as majorId,subject_Name as subjectName,subject_level as subjectLevel from subject where subject_Id = #{subjectId}")
+    SubjectInfo getSubjectInfo(int subjectId);
 }
