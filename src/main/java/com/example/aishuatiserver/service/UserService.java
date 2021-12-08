@@ -94,4 +94,8 @@ public class UserService {
         String pwdMd5 = PasswordUtil.generatePassword(stuAccount,newPwd);
         userMapper.changeMyPwd(pwdMd5,stuId);
     }
+
+    public void adminChangeStuInfo(int stuId,String stuName,String stuNickName,String stuEmail,String stuTelephoto,int majorId,String stu_level){
+        userMapper.adminChangeStuInfo(stuId,stuName,stuNickName,stuEmail,stuTelephoto,majorId,stu_level);
+    }
 }

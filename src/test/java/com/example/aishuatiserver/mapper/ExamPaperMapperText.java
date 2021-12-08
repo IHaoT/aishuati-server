@@ -12,11 +12,14 @@ public class ExamPaperMapperText {
     @Autowired
     private ExamPaperMapper examPaperMapper;
 
+    /**
+     * 测试试卷添加
+     */
     @Test
     public void add(){
         ExamPaper examPaper = new ExamPaper();
         int examPaterId = examPaperMapper.getMaxExamPaperId();
-        Assert.assertEquals(examPaterId,0);
+        Assert.assertEquals(examPaterId,1);
         examPaper.setExamPaperId(examPaterId+1);
         examPaper.setExamPaperFrom("xxxx");
         examPaper.setExamPaperAddress("addressTest");

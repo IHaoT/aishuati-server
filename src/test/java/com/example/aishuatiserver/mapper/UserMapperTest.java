@@ -25,12 +25,15 @@ public class UserMapperTest {
         Assert.assertTrue("reg success", true);
     }
 
+    /**
+     * 测试通过学生编号获取学生信息
+     */
     @Test
     public void getStudentById(){
         Student stu1 = userMapper.getStuByAccount("test01");
-        Assert.assertEquals(stu1.getStuName(),"testName01");
-        Assert.assertEquals(stu1.getStuId(),12);
-        Assert.assertEquals(stu1.getStuNickName(),"testNickName01");
+        Assert.assertEquals(stu1.getStuName(),"test01");
+        Assert.assertEquals(stu1.getStuId(),14);
+        Assert.assertEquals(stu1.getStuNickName(),"test01");
         Assert.assertEquals(stu1.getStu_level(),"大三");
     }
 

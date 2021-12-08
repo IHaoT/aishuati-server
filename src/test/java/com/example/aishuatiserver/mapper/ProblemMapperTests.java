@@ -28,6 +28,7 @@ public class ProblemMapperTests {
 
         problemMapper.addChoiceProblem(problemId+1,1,1,1,4,"设F(X)定义域为(1,2),则F(lgx)的定义域为",2,
                 "(0,lg2)","(0,lg2]","(10,100)","(1,2)","该题暂无解析");
+        Assert.assertTrue("Choice Problem Add Success",true);
     }
 
     @Test
@@ -35,6 +36,7 @@ public class ProblemMapperTests {
         int problemId = problemMapper.getMaxProblemId();
 
         problemMapper.addSubjectiveProblem(problemId+1,1,1,2,4,"才能深刻揭示出你看这些那么在你没出现你","xjznxmnxzmnmnzmmxnnz");
+        Assert.assertTrue("Subjective problem add success", true);
     }
 
     @Test

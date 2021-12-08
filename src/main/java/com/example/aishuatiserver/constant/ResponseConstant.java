@@ -13,6 +13,8 @@ public class ResponseConstant {
     public static final Map<String, Object> X_USER_WRONG_PASSWORD = BaseResponsePackageUtil.errorMessage("用户名或密码错误");
     public static final Map<String, Object> X_USER_ALREADY_EXISTS = BaseResponsePackageUtil.errorMessage("用户已存在");
     public static final Map<String, Object> X_ALREADY_EXISTS = BaseResponsePackageUtil.errorMessage("请勿重复添加");
+    public static final Map<String, Object> X_MAJOR_NOT_FIND = BaseResponsePackageUtil.errorMessage("学科输入错误");
+
 
     public static final Map<String, Object> V_USER_LOGIN_SUCCESS = BaseResponsePackageUtil.succeedMessage("登录成功");
     public static final Map<String, Object> V_USER_LOGOUT_SUCCESS = BaseResponsePackageUtil.succeedMessage("退出成功");

@@ -8,12 +8,13 @@ import com.example.aishuatiserver.constant.InitPwd;
 import com.example.aishuatiserver.constant.PermissionLevel;
 import com.example.aishuatiserver.constant.ResponseConstant;
 import com.example.aishuatiserver.service.AdminService;
+import com.example.aishuatiserver.service.MajorService;
+import com.example.aishuatiserver.service.UserService;
 import com.example.aishuatiserver.util.BaseResponsePackageUtil;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jws.Oneway;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
@@ -23,6 +24,12 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private MajorService majorService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
     public Map<String, Object> reg(
@@ -145,4 +152,26 @@ public class AdminController {
         return ResponseConstant.V_UPDATE_SUCCESS;
     }
 
+    @RequestMapping(value = "/changeStuInfoById",method = RequestMethod.POST)
+    public Map<String,Object> changeStuInfo(
+            @RequestBody JSONObject p,
+            HttpServletRequest request
+    ){
+        if (!adminService.checkPermission(request.getSession(), PermissionLevel.SUPER_ADMIN)) {
+            return ResponseConstant.X_ACCESS_DENIED;
+        }
+        int stuId = p.getInteger("stuId");
+        String stuName = p.getString("stuName");
+        String stuNickName = p.getString("stuNickName");
+        String stuEmail = p.getString("stuEmail");
+        String stuTelephoto = p.getString("stuTelephoto");
+        String majorName = p.getString("majorName");
+        String stu_level = p.getString("stu_level");
+        int majorId = majorService.getMajorIdByMajorName(majorName);
+        if(majorId == 0){
+            return ResponseConstant.X_MAJOR_NOT_FIND;
+        }
+        userService.adminChangeStuInfo(stuId,stuName,stuNickName,stuEmail,stuTelephoto,majorId,stu_level);
+        return ResponseConstant.V_UPDATE_SUCCESS;
+    }
 }

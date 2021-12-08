@@ -34,7 +34,7 @@ public interface AdminMapper {
     @Update("update administrator set Administrator_pwd = #{newPwd} where Administrator_id = #{adminId}")
     void updateMyPwd(String newPwd,int adminId);
 
-    @Update("update administrator set Administrator_email = #{email},Administrator_telephone = #{telephoto},introduce = #{introduce} where Administrator_id = #{adminId}")
+    @Update("update administrator set Administrator_email = #{email},Administrator_telephone = #{telephoto} where Administrator_id = #{adminId}")
     void updateMyInfo(String email,String telephoto,String introduce,int adminId);
 
     @Select("select count(*) from administrator")
