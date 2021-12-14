@@ -64,4 +64,5 @@ public interface UserMapper {
             "</script>")
     void adminChangeStuInfo(int stuId,String stuName,String stuNickName,String stuEmail,String stuTelephoto,int majorId,String stu_level);
 
+
 }

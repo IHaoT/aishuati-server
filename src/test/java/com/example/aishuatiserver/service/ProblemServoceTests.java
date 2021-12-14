@@ -1,6 +1,8 @@
 package com.example.aishuatiserver.service;
 
+import com.example.aishuatiserver.JavaBean.Problem;
 import com.example.aishuatiserver.mapper.ProblemMapper;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +47,21 @@ public class ProblemServoceTests {
         System.out.println(problemService.getAllSubjectiveProblemInfo(
                 2,1,20
         ));
+    }
+
+    @Test
+    public void updateSigleProblemById(){
+        Problem problem = new Problem();
+        problem.setProblemId(13);
+        problem.setChoice_A("1");
+        problem.setChoice_B("2");
+        problem.setChoice_C("3");
+        problem.setChoice_D("4");
+        problem.setInfo_text_content("微积分简单吗");
+        problem.setDifficult(1);
+        problem.setCorrect(1);
+        problem.setReference("wu");
+        int rows = problemService.updateSigleProblemById(problem);
+        Assert.assertEquals(rows,1,1);
     }
 }

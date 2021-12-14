@@ -7,6 +7,7 @@ import com.example.aishuatiserver.JavaBean.WrongProblem;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -170,4 +171,20 @@ public interface ProblemMapper {
     @Select("select problem_Id as problemId,subject_Name as subjectName,Administrator_id as administratorId,difficult,info_text_content,reference " +
             "from problem left join subject on problem.subject_Id = subject.subject_Id where problem_type = 2 and problem_Id = #{problemId}")
     SubjectiveProblemInfo getSubjectiveProblemByProblem(int problemId);
+
+    @Update("update problem set difficult = #{difficult}  ,info_text_content=#{infoTextContent}, correct=#{correct},choice_A=#{choiceA}," +
+            "choice_B=#{choiceB},choice_C=#{choiceC},choice_D=#{choiceD},reference=#{reference} where problem_Id=#{problemId}")
+    Integer updateSigleProblemById(int problemId,int difficult,
+                                String infoTextContent,
+                                int correct,
+                                String  choiceA,
+                                String  choiceB,
+                                String  choiceC,
+                                String  choiceD,
+                                String reference);
+
+    @Update("update problem set difficult = #{difficult}  ,info_text_content=#{infoTextContent},reference=#{reference} where problem_Id=#{problemId}")
+    Integer updateSubjectiveProblemById(int problemId,int difficult,
+                                   String infoTextContent,
+                                   String reference);
 }

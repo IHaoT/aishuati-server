@@ -3,6 +3,7 @@ package com.example.aishuatiserver.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.aishuatiserver.JavaBean.ChoiceProblemInfo;
+import com.example.aishuatiserver.JavaBean.Problem;
 import com.example.aishuatiserver.JavaBean.SubjectiveProblemInfo;
 import com.example.aishuatiserver.JavaBean.WrongProblem;
 import com.example.aishuatiserver.constant.ResponseConstant;
@@ -47,6 +48,7 @@ public class ProblemController {
                 ));
     }
 
+    /*获取单选题信息*/
     @RequestMapping(value = "/choice/getAllProblemList/{page}/{size}", method = RequestMethod.POST)
     public Map<String,Object> adminGetAllChoiceProblemInfo(
             @PathVariable(value = "page") int page,
@@ -265,4 +267,42 @@ public class ProblemController {
     ){
         return BaseResponsePackageUtil.baseData(problemService.getSubjectiveProblemByProblemId(problemId));
     }
+
+    @RequestMapping(value = "/updateSigleProblem")
+    public Map<String,Object> updateSigleProblemById(
+            @RequestBody JSONObject p
+    ){
+        Problem problem = new Problem();
+        problem.setProblemId(p.getInteger("problemId"));
+        problem.setChoice_A(p.getString("choice_A"));
+        problem.setChoice_B(p.getString("choice_B"));
+        problem.setChoice_C(p.getString("choice_C"));
+        problem.setChoice_D(p.getString("choice_D"));
+        problem.setInfo_text_content(p.getString("Info_text_content"));
+        problem.setDifficult(p.getInteger("difficult"));
+        problem.setCorrect(p.getInteger("correct"));
+        problem.setReference(p.getString("reference"));
+        int row=0;
+        try {
+            row = problemService.updateSigleProblemById(problem);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return BaseResponsePackageUtil.baseData(row);
+    }
+
+    @RequestMapping(value = "/updateSubjectiveProblem")
+    public Map<String,Object> updateSubjectiveProblemById(
+            @RequestBody JSONObject p
+    ){
+
+        Integer problemId=p.getInteger("problemId");
+        String Info_text_content =p.getString("Info_text_content");
+        Integer difficult =p.getInteger("difficult");
+        String reference =p.getString("reference");
+
+
+        return BaseResponsePackageUtil.baseData(problemService.updateSubjectiveProblemById(problemId,difficult,Info_text_content,reference));
+    }
+
 }

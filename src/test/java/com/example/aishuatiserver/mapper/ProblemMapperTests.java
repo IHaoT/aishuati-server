@@ -5,6 +5,7 @@ import com.example.aishuatiserver.JavaBean.WrongProblem;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -90,7 +91,11 @@ public class ProblemMapperTests {
     }
 
 
-
+    @Test
+    public void updateSigleProblemById(){
+        int row = problemMapper.updateSigleProblemById(13,1,"飒飒江户时代记得哈结婚登记撒谎觉得还是",2,"1","2","3","4","z暂无解析");
+        Assert.assertEquals(row,1,1);
+    }
 
 
 
