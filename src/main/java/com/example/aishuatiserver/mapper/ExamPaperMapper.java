@@ -59,4 +59,11 @@ public interface ExamPaperMapper {
                 ") as a" +
             "</script>")
     int searchMyExamPaperCount(int stuId,String SubjectName,Integer examPaperId);
+
+    @Select("select exampaper_Id as examPaperId,subject_Name as subjectName,Administrator_id as adminId,exampaper_name as examPaperName,grade_level as level,exampaper_address as examPaperAddress,create_time as createTime,exampaper_from as examPaperFrom " +
+            "from exampaper left join subject on exampaper.subject_Id = subject.subject_Id where subject_Name = #{subjectName} limit #{offset},#{size}")
+    List<ExamPaperInfo> adminSearchExamPaper(String subjectName,int offset,int size);
+
+    @Select("select count(*) from (select exampaper_Id as examPaperId,subject_Name as subjectName,Administrator_id as adminId,exampaper_name as examPaperName,grade_level as level,exampaper_address as examPaperAddress,create_time as createTime,exampaper_from as examPaperFrom from exampaper left join subject on exampaper.subject_Id = subject.subject_Id where subject_Name = #{subjectName}) as a")
+    int adminSearchExamPaperCount(String subjectName);
 }

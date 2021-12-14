@@ -61,4 +61,12 @@ public class ExamPaperService {
     public int stuSearchMyExamPaperCount(int stuId,String subjectName,Integer examPaperId){
         return examPaperMapper.searchMyExamPaperCount(stuId,subjectName,examPaperId);
     }
+
+    public List<ExamPaperInfo> adminSearchExamPaper(String subjectName,int page,int size){
+        return examPaperMapper.adminSearchExamPaper(subjectName,(page-1)*size,size);
+    }
+
+    public int adminSearchExamPaperCount(String subjectName){
+        return examPaperMapper.adminSearchExamPaperCount(subjectName);
+    }
 }
