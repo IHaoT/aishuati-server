@@ -1,6 +1,7 @@
 package com.example.aishuatiserver.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.aishuatiserver.JavaBean.Administrator;
 import com.example.aishuatiserver.config.FileConfig;
 import com.example.aishuatiserver.constant.ResponseConstant;
 import com.example.aishuatiserver.service.AdminService;
@@ -81,7 +82,7 @@ public class ExamPaperController {
         }
     }
 
-    @RequestMapping(value = "/showAllExamPaper/{page}/{size}")
+    @RequestMapping(value = "/showAllExamPaper/{page}/{size}",method = RequestMethod.POST)
     public Map<String,Object> getAllExamPaper(
             @PathVariable(value = "page") int page,
             @PathVariable(value = "size") int size,
@@ -127,6 +128,23 @@ public class ExamPaperController {
                   "total",examPaperService.stuSearchMyExamPaperCount(stuId,subjectName,examPaperId),
                   "data",examPaperService.stuSearchMyExamPaper(stuId,subjectName,examPaperId,page,pageSize)
           ));
+    }
+
+    @RequestMapping(value = "/search/admin/{page}/{size}",method = RequestMethod.POST)
+    public Map<String,Object> adminSearchExamPaper(
+            @RequestBody JSONObject p,
+            @PathVariable(value = "page") int page,
+            @PathVariable(value = "size") int size,
+            HttpServletRequest request
+    ){
+        Integer adminId = adminService.getAdminIdFromSession(request.getSession());
+        if(adminId == null) return ResponseConstant.X_USER_LOGIN_FIRST;
+        String subjectName = p.getString("subjectName");
+        return BaseResponsePackageUtil.baseData(
+                ImmutableMap.of(
+                        "total",examPaperService.adminSearchExamPaperCount(subjectName),
+                        "rows",examPaperService.adminSearchExamPaper(subjectName,page,size)
+                ));
     }
 
 }
