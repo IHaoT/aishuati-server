@@ -19,9 +19,6 @@ public class UserMapperTests {
         System.out.println(res);
     }
 
-    @Test
-    public void setPwd(){
 
-    }
 
 }

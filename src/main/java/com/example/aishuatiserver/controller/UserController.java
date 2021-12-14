@@ -10,6 +10,7 @@ import com.example.aishuatiserver.mapper.EventLogMapper;
 import com.example.aishuatiserver.service.EventLogService;
 import com.example.aishuatiserver.service.UserService;
 import com.example.aishuatiserver.util.BaseResponsePackageUtil;
+import com.example.aishuatiserver.util.PasswordUtil;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,10 +128,14 @@ public class UserController {
             @RequestBody JSONObject p,
             HttpServletRequest request
     ){
+        String pwd = p.getString("pwd");
         String pwd1 = p.getString("pwd1");
         String pwd2 = p.getString("pwd2");
         int stuId = userService.getStuIdBySession(request.getSession());
         String stuAccount = userService.getStuAccountBySession(request.getSession());
+        String stuPwdMD5 =userService.findPwdById(stuId);
+        String pwdMD5 = PasswordUtil.generatePassword(stuAccount,pwd);
+        if(!stuPwdMD5.equals(pwdMD5)) return ResponseConstant.X_PWD;
         if(!pwd1.equals(pwd2)) {
             return ResponseConstant.X_REPLACE_PWD;
         }
