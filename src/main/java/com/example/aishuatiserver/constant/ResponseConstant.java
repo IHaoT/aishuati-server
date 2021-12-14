@@ -48,7 +48,7 @@ public class ResponseConstant {
     public static final Map<String, Object> X_QUERY_FAILED = BaseResponsePackageUtil.errorMessage("请先提交答案");
     public static final Map<String, Object> X_ADD_FAILED = BaseResponsePackageUtil.errorMessage("新增失败");
     public static final Map<String, Object> X_REPLACE_PWD = BaseResponsePackageUtil.errorMessage("输入两次密码不一致");
-
+    public static final Map<String,Object>  X_PWD = BaseResponsePackageUtil.errorMessage("密码错误");
     // Any success
     public static final Map<String, Object> V_UPDATE_SUCCESS = BaseResponsePackageUtil.succeedMessage("更新成功");
     public static final Map<String, Object> V_DELETE_SUCCESS = BaseResponsePackageUtil.succeedMessage("删除成功");

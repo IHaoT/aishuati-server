@@ -7,7 +7,6 @@ import com.example.aishuatiserver.mapper.MajorMapper;
 import com.example.aishuatiserver.mapper.UserMapper;
 import com.example.aishuatiserver.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -97,5 +96,9 @@ public class UserService {
 
     public void adminChangeStuInfo(int stuId,String stuName,String stuNickName,String stuEmail,String stuTelephoto,int majorId,String stu_level){
         userMapper.adminChangeStuInfo(stuId,stuName,stuNickName,stuEmail,stuTelephoto,majorId,stu_level);
+    }
+
+    public String findPwdById(int stuId){
+       return  userMapper.findPwdById(stuId);
     }
 }

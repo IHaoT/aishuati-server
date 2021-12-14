@@ -49,6 +49,9 @@ public interface UserMapper {
     @Update("update student set stu_password = #{newPwd} where stu_Id = #{stuId}")
     void changeMyPwd(String newPwd,int stuId);
 
+    @Select("select stu_password as stuPwd from student where stu_Id = #{stuId}")
+    String findPwdById(int stuId);
+
     @Update("<script>" +
             "update student set stu_NickName = #{stuNickName}, "+
             "<if test = \"stuEmail != null\">"+

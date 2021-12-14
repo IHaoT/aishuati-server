@@ -19,4 +19,9 @@ public class UserServiceTests {
         System.out.println(res);
     }
 
+    @Test
+    public void findPwdById(){
+        System.out.println(userService.findPwdById(2));
+    }
+
 }
