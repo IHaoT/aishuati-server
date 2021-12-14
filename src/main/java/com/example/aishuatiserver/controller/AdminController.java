@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "admin")
+@RequestMapping(value = "/admin")
 public class AdminController {
 
     @Autowired
