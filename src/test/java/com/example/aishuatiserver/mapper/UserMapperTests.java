@@ -19,10 +19,6 @@ public class UserMapperTests {
         System.out.println(res);
     }
 
-    @Test
-    public void findPwdById(){
-        System.out.println(userMapper.findPwdById(2));
-    }
 
 
 }
