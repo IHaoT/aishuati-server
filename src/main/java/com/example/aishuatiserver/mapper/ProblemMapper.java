@@ -2,6 +2,7 @@ package com.example.aishuatiserver.mapper;
 
 
 import com.example.aishuatiserver.JavaBean.ChoiceProblemInfo;
+import com.example.aishuatiserver.JavaBean.Problem;
 import com.example.aishuatiserver.JavaBean.SubjectiveProblemInfo;
 import com.example.aishuatiserver.JavaBean.WrongProblem;
 import org.apache.ibatis.annotations.Insert;
@@ -187,4 +188,5 @@ public interface ProblemMapper {
     Integer updateSubjectiveProblemById(int problemId,int difficult,
                                    String infoTextContent,
                                    String reference);
+
 }

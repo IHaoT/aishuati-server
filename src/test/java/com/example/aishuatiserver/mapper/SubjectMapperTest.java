@@ -50,7 +50,10 @@ public class SubjectMapperTest {
         Assert.assertEquals(list.size(),2);
     }
 
-
+    @Test
+    public void findBySubjectName(){
+        System.out.println(subjectMapper.findBySubjectName(2,"大学物理"));
+    }
 
 
 }

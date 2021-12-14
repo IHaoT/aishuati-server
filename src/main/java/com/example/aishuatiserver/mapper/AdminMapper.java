@@ -28,6 +28,12 @@ public interface AdminMapper {
     @Select("select Administrator_id,Administrator_Account,Administrator_name,Administrator_pwd,Administrator_email,Administrator_telephone,Administrator_createTime,state from administrator where administrator_Account = #{aminAccount}")
     Administrator getAdminByAdminAccount(String aminAccount);
 
+    @Select("select * from administrator where administrator_Name = #{adminName} limit #{offset},#{size}")
+    Administrator getAdminByAdminname(String adminName,int offset,int size);
+
+    @Select("select count(*) from (select administrator_Id from administrator where administrator_Name = #{adminName}) as a")
+    int getAdminByAdminNameCount(String adminName);
+
     @Update("update administrator set state = 999 where Administrator_id = #{adminId}")
     void updateState(int adminId);
 

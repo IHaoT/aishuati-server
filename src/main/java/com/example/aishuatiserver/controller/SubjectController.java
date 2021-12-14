@@ -89,4 +89,14 @@ public class SubjectController {
         return ResponseConstant.V_ADD_SUCCESS;
     }
 
+    @RequestMapping("/searchBySubjectName")
+    public Map<String,Object> findBySubjectName(
+            @RequestBody JSONObject p,
+            HttpServletRequest request
+    ){
+        String subjectName = p.getString("subjectName");
+        Integer stuId = userService.getStuIdBySession(request.getSession());
+        return BaseResponsePackageUtil.baseData(subjectService.findBySubjectName(stuId,subjectName));
+    }
+
 }

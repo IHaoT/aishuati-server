@@ -3,6 +3,7 @@ package com.example.aishuatiserver.mapper;
 
 import com.example.aishuatiserver.JavaBean.Subject;
 import com.example.aishuatiserver.JavaBean.SubjectInfo;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -32,6 +33,12 @@ public interface SubjectMapper {
     @Select("select subject_Id as subjectId,major_Id as majorId,subject_Name as subjectName,subject_level as subjectLevel from subject where \n" +
             "subject_Id in (select subject_Id from possesse where stu_Id = #{stuId}) limit #{offset},#{size}")
     List<SubjectInfo> showMySelectSubject(int stuId,int offset,int size);
+
+    @Select("select subject_Id as subjectId,major_Id as majorId,subject_Name as subjectName,subject_level as subjectLevel from subject where \n" +
+            "subject_Id in (select subject_Id from possesse where stu_Id = #{stuId}) and subject_Name = #{subjectName}")
+    List<SubjectInfo> findBySubjectName(int stuId,String subjectName);
+
+//    @Delete("")
 
     @Select("select count(*) from subject where subject_Id in (select subject_id from possesse where stu_id = #{stuId})")
     int getMySelectCount(int stu);

@@ -59,4 +59,9 @@ public class AdminMapperTest {
         Assert.assertEquals(adminInfo.getAdminTelephoto(),"12141");
         Assert.assertEquals(adminInfo.getAdminEmail(),"123456@qq.com");
     }
+
+    @Test
+    public void getAdminByAdminname(){
+        System.out.println(adminMapper.getAdminByAdminname("yc",0,10));
+    }
 }

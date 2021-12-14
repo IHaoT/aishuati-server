@@ -60,4 +60,8 @@ public class SubjectService {
     public List<SubjectInfo> showMySelectSubject(int stuId,int page,int size){
         return subjectMapper.showMySelectSubject(stuId,(page-1)*size,size);
     }
+
+    public List<SubjectInfo> findBySubjectName(int stuId , String sbjectName){
+        return subjectMapper.findBySubjectName(stuId,sbjectName);
+    }
 }
