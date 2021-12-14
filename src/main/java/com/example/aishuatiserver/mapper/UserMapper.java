@@ -1,6 +1,7 @@
 package com.example.aishuatiserver.mapper;
 
 
+import com.example.aishuatiserver.JavaBean.AdminInfo;
 import com.example.aishuatiserver.JavaBean.StuInfo;
 import com.example.aishuatiserver.JavaBean.Student;
 import org.apache.ibatis.annotations.*;
@@ -64,4 +65,21 @@ public interface UserMapper {
             "</script>")
     void adminChangeStuInfo(int stuId,String stuName,String stuNickName,String stuEmail,String stuTelephoto,int majorId,String stu_level);
 
+    @Select("<script>" +
+            "select stu_Id as stuId,stu_account as stuAccount,stu_Name as stuName,stu_Nickname as stuNickName ,stu_email as stuEmail,stu_telphoto as stuTelephoto,marjor_Name as majorName,stu_level from student left join major on student.stu_majorId = major.major_Id " +
+            "<where> " +
+            "<if test = \"stuName != null\">stu_Name = #{stuName} </if>" +
+            "<if test = \"level != null\">and stu_level = #{level}</if>" +
+            "</where>" +
+            "</script>")
+    List<StuInfo> searchStudent(String stuName, String level, int offset, int size);
+
+    @Select("<script>" +
+            "select count(*) from (select stu_Id from student " +
+            "<where> " +
+            "<if test = \"stuName != null\">stu_Name = #{stuName} </if>" +
+            "<if test = \"level != null\">and stu_level = #{level}</if>" +
+            "</where>) as a " +
+            "</script>")
+    int SearchStudentCount(String stuName,String level);
 }
