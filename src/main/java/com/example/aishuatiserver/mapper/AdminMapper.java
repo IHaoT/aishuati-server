@@ -47,6 +47,7 @@ public interface AdminMapper {
     void changeTeacherInfo(AdminInfo adminInfo);
 
     @Select("select Administrator_id as adminId,Administrator_account as adminAccount,Administrator_name as adminName,Administrator_email as adminEmail,Administrator_telephone as adminTelephoto,Administrator_createtime as adminCreateTime,state from administrator where Administrator_id = #{adminId}")
-    AdminInfo getAdminByAdminId(int adminId);
+    public AdminInfo getAdminByAdminId(int adminId);
+
 
 }
