@@ -7,6 +7,7 @@ import com.example.aishuatiserver.JavaBean.Administrator;
 import com.example.aishuatiserver.constant.InitPwd;
 import com.example.aishuatiserver.constant.PermissionLevel;
 import com.example.aishuatiserver.constant.ResponseConstant;
+import com.example.aishuatiserver.constant.StuLevel;
 import com.example.aishuatiserver.service.AdminService;
 import com.example.aishuatiserver.service.MajorService;
 import com.example.aishuatiserver.service.UserService;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "admin")
+@RequestMapping(value = "/admin")
 public class AdminController {
 
     @Autowired
@@ -189,5 +190,21 @@ public class AdminController {
         }
         userService.adminChangeStuInfo(stuId,stuName,stuNickName,stuEmail,stuTelephoto,majorId,stu_level);
         return ResponseConstant.V_UPDATE_SUCCESS;
+    }
+
+    @RequestMapping(value = "/student/search/{page}/{size}")
+    public Map<String,Object> searchStu(
+            @RequestBody JSONObject p,
+            @PathVariable(value = "page") int page,
+            @PathVariable(value = "size") int size,
+            HttpServletRequest request
+    ){
+        String stuName = p.getString("stuName");
+        String stu_level = p.getString("stu_level");
+        return BaseResponsePackageUtil.baseData(
+                ImmutableMap.of(
+                  "total",userService.SearchStudentCount(stuName,stu_level),
+                  "rows",userService.searchStudent(stuName,stu_level,page,size)
+          ));
     }
 }

@@ -101,4 +101,12 @@ public class UserService {
     public String findPwdById(int stuId){
        return  userMapper.findPwdById(stuId);
     }
+
+    public List<StuInfo> searchStudent(String stuName, String level, int page, int size){
+        return userMapper.searchStudent(stuName,level,(page-1)*size,size);
+    }
+
+    public int SearchStudentCount(String stuName,String level){
+        return userMapper.SearchStudentCount(stuName,level);
+    }
 }

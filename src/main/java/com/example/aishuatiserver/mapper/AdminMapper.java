@@ -50,11 +50,11 @@ public interface AdminMapper {
     @Select("select Administrator_id as adminId,Administrator_account as adminAccount,Administrator_name as adminName,Administrator_email as adminEmail,Administrator_telephone as adminTelephoto,Administrator_createtime as adminCreateTime,state from administrator limit #{offset},#{size}")
     List<AdminInfo> getAllAdminInfo(int offset,int size);
 
-    @Update("update administrator set Administrator_name = #{Administrator_name},Administrator_email = #{Administrator_email},Administrator_telephone = #{Administrator_telephone} where Administrator_Id = #{Administrator_id}")
-    void changeTeacherInfo(AdminInfo adminInfo
-                           );
+    @Update("update administrator set Administrator_name = #{adminName},Administrator_email = #{adminEmail},Administrator_telephone = #{adminTelephoto} where Administrator_Id = #{adminId}")
+    void changeTeacherInfo(AdminInfo adminInfo);
 
     @Select("select Administrator_id as adminId,Administrator_account as adminAccount,Administrator_name as adminName,Administrator_email as adminEmail,Administrator_telephone as adminTelephoto,Administrator_createtime as adminCreateTime,state from administrator where Administrator_id = #{adminId}")
-    AdminInfo getAdminByAdminId(int adminId);
+    public AdminInfo getAdminByAdminId(int adminId);
+
 
 }

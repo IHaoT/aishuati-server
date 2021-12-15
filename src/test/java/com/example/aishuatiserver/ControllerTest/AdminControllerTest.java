@@ -53,21 +53,23 @@ public class AdminControllerTest {
                 "    \"adminAccount\":\"admin\",\n" +
                 "    \"adminPwd\":\"admin\"\n" +
                 "}";
-        request = MockMvcRequestBuilders.post("https://aishuati/admin/login").content(Json).contentType(MediaType.APPLICATION_JSON).session(session);  //传递参数类型指定为Json
+        request = MockMvcRequestBuilders.post("https://aishuati.zuccacm.top/admin/login").content(Json).contentType(MediaType.APPLICATION_JSON).session(session);  //传递参数类型指定为Json
         ResultActions resultActions = mvc.perform(request)
                 .andExpect(status().isOk());
         MockHttpServletResponse response = resultActions.andReturn().getResponse();
         response.setCharacterEncoding("UTF-8");
         resultActions.andDo(print());
 
-        Json = "{\n" +
-                "    \"email\":\"222@qq.com\",\n" +
-                "    \"adminTelephoto\":\"11241234135233\"\n" +
-                "}";
-        request = MockMvcRequestBuilders.post("https://aishuaiti/admin/updateMyInfo").content(Json).contentType(MediaType.APPLICATION_JSON).session(session);
-        resultActions = mvc.perform(request).andExpect(status().isOk());
-        resultActions.andReturn().getResponse().setCharacterEncoding("UTF-8");
+        /**
+         * 测试获取学生信息
+         */
+        request = MockMvcRequestBuilders.post("https://aishuati.zuccacm.top/admin/getAllAdminInfo/1/10").session(session);
+        resultActions = mvc.perform(request)
+                .andExpect(status().isOk());
+        response = resultActions.andReturn().getResponse();
+        response.setCharacterEncoding("UTF-8");
         resultActions.andDo(print());
+
     }
 
     @Test
