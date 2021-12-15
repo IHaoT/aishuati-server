@@ -82,4 +82,5 @@ public interface UserMapper {
             "</where>) as a " +
             "</script>")
     int SearchStudentCount(String stuName,String level);
+
 }

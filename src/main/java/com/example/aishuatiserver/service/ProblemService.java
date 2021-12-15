@@ -2,6 +2,7 @@ package com.example.aishuatiserver.service;
 
 
 import com.example.aishuatiserver.JavaBean.ChoiceProblemInfo;
+import com.example.aishuatiserver.JavaBean.Problem;
 import com.example.aishuatiserver.JavaBean.SubjectiveProblemInfo;
 import com.example.aishuatiserver.JavaBean.WrongProblem;
 import com.example.aishuatiserver.mapper.ProblemMapper;
@@ -135,5 +136,21 @@ public class ProblemService {
 
     public SubjectiveProblemInfo getSubjectiveProblemByProblemId(int problemId){
         return problemMapper.getSubjectiveProblemByProblem(problemId);
+    }
+
+    public int  updateSigleProblemById(Problem problem){
+        int row = problemMapper.updateSigleProblemById(problem.getProblemId(),
+                problem.getDifficult(),problem.getInfo_text_content(),
+                problem.getCorrect(), problem.getChoice_A(),problem.getChoice_B(),
+                problem.getChoice_C(),problem.getChoice_D(),problem.getReference());
+       return row;
+    }
+
+    public int  updateSubjectiveProblemById(int problemId,int difficult,
+                                            String infoTextContent,
+                                            String reference){
+        int row = problemMapper.updateSubjectiveProblemById(problemId,difficult,infoTextContent,reference);
+
+        return row;
     }
 }

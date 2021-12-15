@@ -54,9 +54,16 @@ public class AdminMapperTest {
 
     @Test
     public void changeAdminInfo(){
-        adminMapper.updateMyInfo("123456@qq.com","12141","这个人很懒",3);
+        adminMapper.updateMyInfo("123456@qq.com","1214","这个人很懒",3);
         AdminInfo adminInfo = adminMapper.getAdminByAdminId(3);
-        Assert.assertEquals(adminInfo.getAdminTelephoto(),"12141");
+        Assert.assertEquals(adminInfo.getAdminTelephoto(),"1214");
         Assert.assertEquals(adminInfo.getAdminEmail(),"123456@qq.com");
     }
+
+    @Test
+    public void getAdminByAdminname(){
+        System.out.println(adminMapper.getAdminByAdminname("yc",0,10));
+    }
+
+
 }

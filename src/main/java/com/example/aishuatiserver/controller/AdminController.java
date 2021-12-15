@@ -94,6 +94,22 @@ public class AdminController {
         return BaseResponsePackageUtil.baseData(adminService.getAdminByAdminId(adminId));
     }
 
+    @RequestMapping(value = "/teacher/search/{page}/{size}",method = RequestMethod.POST)
+    public Map<String,Object> getAdminByAdminName(
+            @RequestBody JSONObject p,
+            @PathVariable(value = "page") int page,
+            @PathVariable(value = "size") int size
+    ){
+        String adminName = p.getString("adminName");
+        return BaseResponsePackageUtil.baseData(
+                ImmutableMap.of(
+                        "total",adminService.getAdminByAdminNameCount(adminName),
+                        "rows",adminService.getAdminByAdminName(adminName,page,size)
+                ));
+    }
+
+
+
     @RequestMapping(value = "/updateMyPwd", method = RequestMethod.POST)
     public Map<String, Object> updateMyPwd(
             @RequestBody JSONObject p,

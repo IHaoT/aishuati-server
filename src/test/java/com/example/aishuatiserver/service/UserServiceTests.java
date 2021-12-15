@@ -24,4 +24,12 @@ public class UserServiceTests {
         System.out.println(userService.findPwdById(2));
     }
 
+    @Test
+    public void adminChangeStuInfo(){
+        userService.adminChangeStuInfo(2,
+                "chenzihui","CHENZIHUI","CHENZIHUI","1234567890123",
+                1,"大三");
+
+    }
+
 }

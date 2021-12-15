@@ -71,6 +71,14 @@ public class AdminService {
         return adminMapper.getAdminByAdminAccount(adminAccount);
     }
 
+    public Administrator getAdminByAdminName(String adminName,int page,int size){
+        return adminMapper.getAdminByAdminname(adminName,(page-1)*size,size);
+    }
+
+    public int getAdminByAdminNameCount(String adminName){
+        return adminMapper.getAdminByAdminNameCount(adminName);
+    }
+
 
     public boolean checkPwd(Administrator admin,String input){
         String PwdMd5 = admin.getAdministrator_Account()+input;
