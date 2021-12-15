@@ -38,7 +38,7 @@ public interface SubjectMapper {
             "subject_Id in (select subject_Id from possesse where stu_Id = #{stuId}) and subject_Name = #{subjectName}")
     List<SubjectInfo> findBySubjectName(int stuId,String subjectName);
 
-//    @Delete("")
+
 
     @Select("select count(*) from subject where subject_Id in (select subject_id from possesse where stu_id = #{stuId})")
     int getMySelectCount(int stu);
