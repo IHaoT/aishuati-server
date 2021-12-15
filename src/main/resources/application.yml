@@ -12,11 +12,11 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml  #配置映射文件
   type-aliases-package: com.example.aishuati.JavaBean #配置实体类
 
-#server:
-#  servlet:
-#    session:
-#      cookie:
-#        secure: true
+server:
+  servlet:
+    session:
+      cookie:
+        secure: true
 
 #fileuploadpath: /home/aishuati-server/files/
 

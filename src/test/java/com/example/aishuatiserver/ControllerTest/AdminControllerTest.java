@@ -70,4 +70,37 @@ public class AdminControllerTest {
         resultActions.andDo(print());
     }
 
+    @Test
+    public void changeStuInfo() throws Exception {
+        RequestBuilder request = null;
+        String Json = "{\n" +
+                "    \"headers\": {\n" +
+                "        \"Content-Type\": \"text/html;charset=utf-8\"\n" +
+                "      },\n" +
+                "    \"adminAccount\":\"admin\",\n" +
+                "    \"adminPwd\":\"admin\"\n" +
+                "}";
+        request = MockMvcRequestBuilders.post("https://aishuati/admin/login").content(Json).contentType(MediaType.APPLICATION_JSON).session(session);  //传递参数类型指定为Json
+        ResultActions resultActions = mvc.perform(request)
+                .andExpect(status().isOk());
+        MockHttpServletResponse response = resultActions.andReturn().getResponse();
+        response.setCharacterEncoding("UTF-8");
+        resultActions.andDo(print());
+
+        Json = "{\n" +
+                "    \"stuId\":\"2\",\n" +
+                "    \"stuName\":\"chenzihui\",\n" +
+                "    \"stuNickName\":\"czh\",\n" +
+                "    \"stuEmail\":\"chenzihui@qq.com\",\n" +
+                "    \"stuTelephoto\":\"1234567890123\",\n" +
+                "    \"majorName\":\"软件工程\",\n" +
+                "    \"stu_level\":\"\"\n" +
+                "}";
+
+        request = MockMvcRequestBuilders.post("https://aishuaiti/admin/changeStuInfoById").content(Json).contentType(MediaType.APPLICATION_JSON).session(session);
+        resultActions = mvc.perform(request).andExpect(status().isOk());
+        resultActions.andReturn().getResponse().setCharacterEncoding("UTF-8");
+        resultActions.andDo(print());
+    }
+
 }

@@ -38,4 +38,18 @@ public class AdminServiceTest {
         List<AdminInfo> list = adminService.getAllAdminInfo(1,10);
         Assert.assertEquals(list.size(),10);
     }
+
+//    @Test
+//    public void changeTeacherInfo(){
+//        Integer AdminId=1;
+//        String adminName = "yc";
+//        String adminEmail="";
+//        String adminTel = "";
+//        String adminAccount="admin";
+//
+//
+//        adminService.changeTeacherInfo(AdminId,adminName,adminEmail,adminTel,adminAccount);
+//
+//
+//    }
 }

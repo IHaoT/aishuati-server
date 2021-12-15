@@ -27,7 +27,7 @@ public class UserServiceTests {
     @Test
     public void adminChangeStuInfo(){
         userService.adminChangeStuInfo(2,
-                "chenzihui","CHENZIHUI","CHENZIHUI@qq.com","1234567890123",
+                "chenzihui","CHENZIHUI","CHENZIHUI","1234567890123",
                 1,"大三");
 
     }
